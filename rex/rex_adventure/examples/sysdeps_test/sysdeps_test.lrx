@@ -1,0 +1,11 @@
+-mux
+-z
+-k /home/simon/sdcc/rxsdk/lib/
+-l z80
+-l librex
+-b _CODE=0x8000
+-b _DATA=0xf000
+sysdeps_test
+/home/simon/sdcc/rxsdk/lib/crt0.o
+/home/simon/programmering/c/rex/rex/rex_adventure/sysdeps/rex_sysdeps.o
+sysdeps_test.o

@@ -1,0 +1,135 @@
+Arkanoid
+--------
+This is a Arkanoid game for the REX 6000. It is also playable on UNIX
+systems with libsdl (see www.libsdl.org), although the SDL port is
+mostly for testing.
+
+The aim of the game is to keep the ball within the playfield and
+remove all blocks ;-).
+
+
+Postcard, credits
+-----------------
+Programming - Simon Kågström
+Graphics    - Simon Kågström
+Icon        - Otavio Guzzi
+
+Although this isn't cardware, I like the cardware concept. Therefore,
+if you like the game, you are encouraged to send me a postcard of your
+hometown! The address is:
+
+Simon Kågström
+Lindblomsvägen 121
+372 33 Ronneby
+Sweden
+
+
+Controls
+--------
+The controls are pretty simple: The up/left-key moves the paddle to
+the left, the down/right-key moves the paddle to the right and the
+enter-key shoots the ball away if it is held.
+
+You can also move the paddle with the stylus. If you point to the left
+of the paddle, the paddle will move left. Obviously, pointing to the
+right of the paddle will move it to the right. You can also shoot the
+ball away by pointing on the upper half of the screen.
+
+You can select which level to start at by editing the second number in
+the arkanoid Memo. Note that the first level is 0, so to play the
+second level, you replace this with 1. Don't add anything else (like
+extra spaces etc) to this file.
+
+
+Installing
+----------
+The REX executable should come with the source (arkanoid.rex), but if
+you want to change it in some way, a recompile is necessary.
+
+UNIX:
+ run make or make arkanoid.bin. The first option builds the SDL
+ executable as well. GNU Make is required.
+
+Other systems:
+ run  zcc +rex -O2 -vn -create-app -D_NOFLOAT_ -DTARGET_REX -o arkanoid.bin arkanoid.c draw.c sysdeps/rex_sysdeps.c
+ to build the REX exectuable. The SDL executable can probably also be
+ compiled, but I'm not familiar with how it's done.
+
+When you have the REX executable, copy that to your REX with REXTools
+or something like that. You should also copy the Zarkanoid.txt file to
+your rex (also with REXTools), which will add the levels as a memo
+with the name arkanoid.
+
+
+Adding levels
+-------------
+The levels are found in the Zarkanoid.txt file, and have a simple but
+strict format. An example will help the explaining:
+
+--File begins--
+02
+00
+0000000000
+0151551110
+0515115510
+0111111110
+0151511510
+0111115110
+0515151510
+0111551110
+0000000000
+
+0000000000
+6226222622
+1111115111
+1151111111
+5111551151
+1111001111
+1150000111
+1100000051
+1000000005
+--File ends--
+
+This is how the first two levels look, more levels would just follow
+this pattern.
+
+Now. Each line above ends with \n and NOTHING more. That is, you
+should take care to not have any trailing spaces or CR/LF's like some
+systems like to add. After each level, an additional \n is added.
+
+The first number in the file states the number of levels. The second
+number states what level to start at, and note that the first level is
+level 0. The two numbers both contains exactly two digits (maximum
+99).
+
+After the two initial numbers, each level consists of 10*9 numbers,
+with every number denoting the type for the corresponding block.
+
+The type should be set to the number of hits added with *if* its a
+special or not (TYPE_SPECIAL == 4, see arkanoid.h). I.e:
+
+0 hits (empty block):       0
+1 hit, no special:          1
+1 hit, special:             1 + 4 = 5
+2 hits, no special:         2
+2 hits, special:            2 + 4 = 6
+infinite hits, no special:  3
+infinite hits, special:     3 + 4 = 7
+
+Infinite hits really means 255 hits, and you really shouldn't place
+specials at such places :-)
+
+
+License
+-------
+The Arkanoid game is free software. It is released under the GNU
+GPL, see the file COPYING for details.
+
+
+Contact
+-------
+Homepage:  http://www.ipd.bth.se/ska/sim_home/rex.html
+E-mail:    ska@bth.se
+
+
+// Simon Kågström

@@ -1,0 +1,10 @@
+Here are some examples of the libraries found here.
+
+sysdeps_test/  A test of the system-dependencies. Will draw some
+               things on the screen and read from a memo.
+advlib_test/   A test program for advlib. Will load a map and display that
+               on the screen (together with a player sprite blitted on the map).
+null_game/     An empty game. You can walk around the world but cannot do anything
+               other than exiting.
+example_game/  An example game. Very, very small. You can look at stuff and do
+               things with one of the trees.

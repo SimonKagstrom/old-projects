@@ -1,0 +1,66 @@
+Installation instructions for REX adventure
+-------------------------------------------
+If this is a binary release, you should upload the library to your REX
+with RexTools just as with any other addin.
+
+  advglib.rex
+
+For games that use the library, like example_game.rex, you need to
+upload both the .rex executable, a messages memo and a scene memo,
+i.e. (for example_game):
+
+  example_game.rex
+  test_messages.txt
+  test_scene.txt
+
+
+
+Run in the emulator
+-------------------
+
+To run in the emulator, you first need to install the library in the
+emulator. For example:
+
+  $ mkemu advglib.b2 PATH_TO_EMULATOR 4
+
+Then you need to create the memos needed for the game. You do this by
+running
+
+  wr_test_messages.rex
+  wr_test_scene.rex
+
+After this (reset the emulator, but don't restart it between rounds),
+you can load the game into the emulator (example_game.rex).
+
+
+
+Compile from source
+-------------------
+Compiling REX adventure from source might be a bit more work. REX
+adventure currently only works with rexdk/z88dk (RxSDK/sdcc needs
+library-support and memo-reading to work). To compile, a few things
+are needed (for z88dk, I'm not sure which of these applies to rexdk):
+
+ - You need to increase the maximum number of include-directories for
+   the preprocessor, change
+    #define        NINCLUDE                  7
+   to
+    #define        NINCLUDE                  14
+   in z88dk/src/cpp/cppdef.h and recompile z88dk.
+
+ - You need a DsClearPixel(). This is just a hacked version of Waleeds
+   DsSetPixel(), and with some luck Daniel have included it in
+   rexdk. Otherwise, I can send it to you.
+
+ - For UNIX-systems, you need GNU Make to compile the sources. Perhaps
+   someone can contribute a make.bat file for windows systems?
+
+ - You need mklib found in rexdk to create the library. mkemu can also
+   be useful, although strictly not needed.
+
+ - (Not needed, but convenient): conv2rex and writememo.
+
+I'll try to make the thing more easily installed in the future.
+
+
+// Simon Kagstrom, ska@bth.se

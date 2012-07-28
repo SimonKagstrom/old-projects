@@ -1,0 +1,58 @@
+The rope looks strong.                          
+The fruit is bright red and looks juicy.        
+The coins are very dirty.                       
+The bottle has a "MrProper" label on it.        
+The coins shine brightly in the sun.            
+....                                            
+..                                              
+....                                            
+..                                              
+....                                            
+..                                              
+....                                            
+..                                              
+....                                            
+..                                              
+..                                              
+You are dead. Better luck next time!            
+Why would you want to do that?                  
+You pick up the item.                           
+You drop the item.                              
+You cannot take that.                           
+That is not the way to use the item.            
+I see nothing special about that.               
+The road ends at a mountain range. A troll is   
+guarding something on a rock. It looks fierce.  
+The road ends in a rubble of rocks. There are   
+a few trees here.                               
+Mountains blocks the passage to the east. The   
+ground is barren here.                          
+A road continues north. There are trees here,   
+one of them has many red fruits.                
+The road bends to the south. There are rocks and
+trees here, but all look uninteresting.         
+A mountain range blocks the passage to the east 
+and south. There are no trees here.             
+A few rocks and trees can be seen here.         
+Mountains block the path to the east.           
+The road ends at a small cabin. The cabin has a 
+garden facing north and a door facing south.    
+You stand in a room. There are three tables     
+here. The exit is to the south.                 
+Red fruits can be seen high in the tree.        
+You throw the rope around a branch high up in   
+the tree, climb up and take one of the fruits.  
+The troll looks greedy.                         
+The troll eats the fruit. Me wants gold! it     
+shouts. The troll seems to want gold.           
+The troll is too heavy to carry.                
+You give the coins to the troll. The troll      
+grunts happily and disappears from its rock.    
+You look through the garden. Under some bushes  
+you find a bunch of golden coins.               
+The door is locked.                             
+A bottle is on the table.                       
+You take the bottle.                            
+You apply MrProper to the coins. They coins are 
+now shining brightly.                           
+

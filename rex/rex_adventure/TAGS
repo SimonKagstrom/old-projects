@@ -1,0 +1,390 @@
+
+advglib/advg_private.h,31
+#define ADVG_PRIVATE_H29,1208
+
+advglib/advg_rex_lib.c,628
+static void adv_init_scene_wrap(34,1266
+static void adv_load_scene_wrap(40,1482
+static void adv_mask_object_wrap(45,1624
+static void adv_mask_background_wrap(51,1826
+static void adv_draw_scene_wrap(57,2028
+static void adv_get_surroundings_wrap(62,2114
+static void advg_display_message_wrap(70,2327
+static void advg_draw_objects_wrap(75,2462
+static void advg_goto_scene_wrap(80,2552
+static void advg_draw_screen_wrap(85,2702
+static advg_event_t _advg_handle_move_wrap(90,2769
+static advg_event_t _advg_handle_press_wrap(95,2874
+static void _advg_reset_action_wrap(100,3011
+void LibMain(106,3104
+void main(155,4131
+
+advglib/advgame.c,998
+#define BUTTON_LOOK 38,1498
+#define BUTTON_USE 39,1527
+#define BUTTON_TAKE 40,1556
+#define BUTTON_QUIT 41,1585
+#define BUTTON_HEIGHT 43,1615
+#define BUTTON_WIDTH 44,1645
+#define BUTTON_HEIGHT_BITS 45,1675
+#define OBJECTS_START_W 47,1705
+#define OBJECTS_START_H 48,1755
+#define GET_MSG_NR(GET_MSG_NR53,1891
+#define set_action(set_action61,2134
+#define check_point_player(check_point_player66,2306
+#define check_point_playfield(check_point_playfield73,2621
+#define check_button_pressed(check_button_pressed80,2911
+static void draw_button(95,3659
+static uint8_t check_scene_events(112,4244
+static uint8_t check_borders(162,5671
+static uint8_t move_player(226,7488
+static void draw_player(252,8228
+void _advg_reset_action(273,8973
+void advg_draw_screen(283,9208
+void init_player(296,9465
+void advg_display_message(303,9692
+void advg_draw_objects(320,10399
+void advg_goto_scene(337,10872
+advg_event_t _advg_handle_press(348,11214
+advg_event_t _advg_handle_move(407,12926
+
+advglib/advgame_bitmaps.h,66
+#define ADVGAME_BITMAPS_H28,1134
+uint8_t button_bitmaps[33,1234
+
+advglib/include/advglib/advgame.h,1752
+#define ADVGAME_H41,1559
+#define ADVG_SCENE_WIDTH 48,1674
+#define ADVG_SCENE_HEIGHT 49,1762
+#define ADVG_GAME_SCREEN_WIDTH 50,1852
+#define ADVG_GAME_SCREEN_HEIGHT 51,1903
+#define ADVG_PLAYER_WIDTH 53,1956
+#define ADVG_PLAYER_HEIGHT 54,2008
+#define ADVG_PLAYER_WIDTH_BYTES 55,2043
+#define ADVG_OBJECT_WIDTH 57,2079
+#define ADVG_OBJECT_HEIGHT 58,2114
+#define ADVG_PLAYER_DEAD 60,2150
+#define ADVG_NR_OBJECTS 62,2202
+#define ADVG_MSG_LINE_LEN 63,2295
+#define ADVG_ACTION_NULL 65,2381
+#define ADVG_ACTION_LOOK 66,2416
+#define ADVG_ACTION_USE 67,2490
+#define ADVG_ACTION_TAKE_OBJECT 68,2525
+#define __MAX_STR_LEN 70,2561
+#define ADVG_EVENT_NULL 78,2800
+#define ADVG_EVENT_FIRST_OBJECT 79,2855
+#define ADVG_EVENT_LAST_OBJECT 80,2895
+#define ADVG_EVENT_ENTER_SCENE 81,2975
+#define ADVG_EVENT_PLAYER 82,3054
+#define ADVG_EVENT_TICK 83,3122
+#define ADVG_EVENT_PLAYER_STOP 84,3188
+#define ADVG_EVENT_EXIT 85,3259
+#define ADVG_EVENT_FIRST_USER 86,3333
+#define ADVG_EVENT_EXIT_EVENT_POINT 87,3442
+#define ADVG_EVENT_ENTER_EVENT_POINT 88,3520
+#define ADVG_REMOVE_OBJECT(ADVG_REMOVE_OBJECT99,3902
+#define ADVG_ADD_OBJECT(ADVG_ADD_OBJECT107,4130
+#define ADVG_HAS_OBJECT(ADVG_HAS_OBJECT117,4434
+#define ADVG_KILL_PLAYER(ADVG_KILL_PLAYER124,4586
+#define ADVG_EVENT_NR(ADVG_EVENT_NR133,4774
+#define ADVG_EVENT_IS(ADVG_EVENT_IS143,5060
+typedef uint8_t advg_event_t;advg_event_t150,5236
+typedef uint16_t advg_objects_t;advg_objects_t155,5309
+} advg_scene_event_t;advg_scene_event_t174,5998
+} advg_player_t;advg_player_t187,6446
+} advg_game_t;advg_game_t214,8187
+#define advg_clear_messages(advg_clear_messages245,9258
+#define advg_stop_player(advg_stop_player254,9628
+#define advg_init_game(advg_init_game304,11321
+
+advglib/include/advglib/gamedeps.h,27
+#define GAMEDEPS_H27,1082
+
+advglib/advg_client_lib.c,521
+#define FARCALL_OFFSET 34,1353
+static int page;36,1384
+static void setup_lib(41,1591
+void adv_init_scene(54,1856
+void adv_load_scene(61,2108
+void adv_mask_object(66,2269
+void adv_mask_background(72,2492
+void adv_draw_scene(78,2708
+void adv_get_surroundings(83,2816
+void advg_display_message(92,3095
+void advg_draw_objects(97,3249
+void advg_goto_scene(102,3358
+void advg_draw_screen(107,3527
+advg_event_t _advg_handle_move(114,3647
+advg_event_t _advg_handle_press(119,3771
+void _advg_reset_action(124,3927
+
+advglib/advg_rex_lib.h,616
+#define ADVG_REX_LIB_H26,1080
+#define ADV_INIT_SCENE 28,1104
+#define ADV_LOAD_SCENE 29,1139
+#define ADV_MASK_OBJECT 30,1174
+#define ADV_MASK_BACKGROUND 31,1209
+#define ADV_DRAW_SCENE 32,1244
+#define ADV_GET_SURROUNDINGS 33,1279
+#define ADVG_INIT_GAME 35,1315
+#define ADVG_LOAD_MESSAGES 36,1350
+#define ADVG_INIT_SCENE_EVENT 37,1385
+#define ADVG_DISPLAY_MESSAGE 38,1420
+#define ADVG_DRAW_OBJECTS 39,1455
+#define ADVG_GOTO_SCENE 40,1490
+#define ADVG_DRAW_SCREEN 41,1525
+#define _ADVG_HANDLE_MOVE 42,1560
+#define _ADVG_HANDLE_PRESS 43,1595
+#define _ADVG_RESET_ACTION 44,1630
+# define ADVG_SIG 48,1751
+
+advglib/game_loop.c,63
+void advg_init_scene_event(33,1290
+void advg_do_game(57,1842
+
+advlib/advlib.c,471
+#define PIC_W 35,1277
+#define PIC_H 36,1293
+#define min(min39,1322
+#define max(max43,1391
+static char level_data[54,1612
+static unsigned char get_tile(73,2459
+static uint8_t *get_tile_img_ptr(80,2751
+static uint8_t mask_bitmap(86,2960
+static void draw_masked(104,3658
+void adv_init_scene(177,6297
+void adv_load_scene(190,6718
+void adv_mask_object(202,7106
+void adv_mask_background(208,7314
+void adv_draw_scene(214,7487
+void adv_get_surroundings(223,7735
+
+advlib/include/advlib/advlib.h,60
+#define ADVLIB_H67,2377
+} adv_scene_t;adv_scene_t88,3094
+
+examples/advlib_test/advlib_test.c,77
+#define SCENE_WIDTH 33,1198
+#define SCENE_HEIGHT 34,1222
+int main(36,1247
+
+examples/example_game/bitmaps.h,280
+#define BITMAPS_H25,1020
+#define NR_TILES 29,1062
+#define NR_OBJECTS 30,1116
+const uint8_t p_background_data[31,1179
+const uint8_t p_player_bitmap[485,8231
+const uint8_t p_player_mask_bitmap[499,8352
+const uint8_t p_troll_bitmap[513,8478
+uint8_t p_objects_bitmap[527,8598
+
+examples/example_game/example_game.c,2348
+#define DEBUG44,1653
+#define TILE_GRASS 47,1692
+#define TILE_VROAD_LEFT 48,1726
+#define TILE_VROAD_MIDDLE 49,1760
+#define TILE_VROAD_RIGHT 50,1794
+#define TILE_HROAD_UP 51,1828
+#define TILE_HROAD_DOWN 52,1862
+#define TILE_ROAD_VTOH_UP 53,1896
+#define TILE_ROAD_VTOH_DOWN 54,1930
+#define TILE_ROAD_HTOV_LEFT 55,1964
+#define TILE_ROAD_HTOV_RIGHT 56,1998
+#define TILE_ROCK 57,2032
+#define TILE_TREE 58,2066
+#define TILE_HOUSE_DLEFT 59,2100
+#define TILE_HOUSE_DRIGHT 60,2134
+#define TILE_HOUSE_ULEFT 61,2168
+#define TILE_HOUSE_URIGHT 62,2202
+#define TILE_MOUNTAIN_ULEFT 63,2236
+#define TILE_MOUNTAIN_UMIDDLE 64,2270
+#define TILE_MOUNTAIN_URIGHT 65,2304
+#define TILE_MOUNTAIN_MLEFT 66,2338
+#define TILE_MOUNTAIN_MMIDDLE 67,2372
+#define TILE_MOUNTAIN_MRIGHT 68,2406
+#define TILE_MOUNTAIN_DLEFT 69,2440
+#define TILE_MOUNTAIN_DMIDDLE 70,2474
+#define TILE_MOUNTAIN_DRIGHT 71,2508
+#define OBJ_NONE 73,2543
+#define OBJ_ROPE 74,2572
+#define OBJ_FRUIT 75,2601
+#define OBJ_COINS 76,2630
+#define WORLD_WIDTH 78,2660
+#define WORLD_HEIGHT 79,2733
+#define SCENE_TROLL 81,2823
+#define SCENE_START 82,2852
+#define SCENE_CABIN 83,2881
+#define NR_SCENES 84,2910
+#define NR_STD_MESSAGES 87,2983
+#define SCENE_MESSAGES_START 88,3053
+#define EVENT_MESSAGES_START 89,3116
+#define YOU_ARE_DEAD 92,3205
+#define WHY_DO_THAT 93,3251
+#define YOU_TAKE_ITEM 94,3300
+#define YOU_DROP_ITEM 95,3349
+#define YOU_CANNOT_TAKE_THAT 96,3398
+#define NOT_USED_LIKE_THAT 97,3447
+#define NOTHING_SPECIAL 98,3496
+#define EV_START_LOOK_TREE 101,3567
+#define EV_START_USE_ROPE_ON_TREE 102,3626
+#define EV_TROLL_LOOK 103,3685
+#define EV_TROLL_FRUIT 104,3744
+#define EV_TROLL_TAKE 105,3803
+#define EV_TROLL_COINS 106,3862
+#define EV_HOUSE_GARDEN_LOOK 107,3921
+#define EV_HOUSE_DOOR_LOOK 108,3980
+void advg_handle_event(120,4646
+static void handle_tick_event(211,7686
+static void handle_player_stops_events(236,8357
+static void handle_player_events(259,9025
+static void handle_objects(283,9564
+#define SC_START_TEST_EVENT 309,10526
+static uint8_t handle_scene_start(310,10576
+#define TROLL_EVENT 351,11932
+static uint8_t handle_scene_troll(353,12027
+#define CABIN_DOOR_EVENT 403,13582
+#define CABIN_GARDEN_EVENT 404,13629
+static uint8_t handle_scene_cabin(405,13677
+static uint8_t handle_scene_default(439,14711
+int main(452,15049
+
+examples/null_game/null_game.c,137
+#define WORLD_WIDTH 32,1307
+#define WORLD_HEIGHT 33,1363
+#define TILE_SIZE 36,1457
+void advg_handle_event(38,1508
+void main(51,1814
+
+examples/sysdeps_test/bitmaps.h,109
+#define BITMAPS_H27,1059
+uint8_t p_grass[32,1167
+uint8_t p_player[54,1441
+uint8_t p_error_bitmap[68,1541
+
+examples/sysdeps_test/sysdeps_test.c,158
+static void fe_draw_bitmap(31,1161
+void test_blit(39,1311
+void test_pixel(59,2052
+void test_printf(70,2234
+void test_memo_read(79,2449
+int main(99,2795
+
+include/sysdeps.h,1526
+#define FRONTEND_H44,1837
+# define FE_REX_OPT 50,1994
+# define FE_REX_OPT 53,2065
+#define FE_PHYS_WIDTH 58,2144
+#define FE_PHYS_HEIGHT 59,2229
+#define FE_PHYS_BYTE_WIDTH 60,2315
+#define FE_EVENT_NONE 63,2423
+#define FE_EVENT_EXIT 64,2450
+#define FE_EVENT_BACK 65,2512
+#define FE_EVENT_SELECT 66,2574
+#define FE_EVENT_LEFT 67,2638
+#define FE_EVENT_RIGHT 68,2703
+#define FE_FONT_NORMAL 70,2771
+#define FE_FONT_INVERTED 71,2817
+#define FE_FONT_BOLD 72,2865
+#define FE_FONT_SMALL 73,2909
+} fe_point_t;fe_point_t92,3374
+} fe_event_t;fe_event_t103,3604
+#  define fe_fill_area(fe_fill_area118,3907
+#  define fe_fill_area(fe_fill_area120,3987
+#  define fe_clear_area(fe_clear_area138,4441
+#  define fe_clear_area(fe_clear_area140,4524
+# define fe_clear_screen(fe_clear_screen152,4799
+#  define fe_set_pixel(fe_set_pixel159,5001
+#  define fe_set_pixel(fe_set_pixel161,5072
+#  define fe_clear_pixel(fe_clear_pixel169,5273
+#  define fe_clear_pixel(fe_clear_pixel171,5348
+#  define fe_get_stylus(fe_get_stylus208,6668
+#  define fe_get_stylus(fe_get_stylus210,6734
+#  define fe_get_buttons(fe_get_buttons239,7698
+#  define fe_get_buttons(fe_get_buttons241,7753
+#  define fe_print_xy(fe_print_xy315,10009
+#  define fe_print_xy(fe_print_xy317,10093
+#  define fe_init(fe_init346,11030
+#  define fe_init(fe_init351,11222
+#  define fe_finalize(fe_finalize366,11642
+#  define fe_finalize(fe_finalize372,11811
+#  define fe_sleep(fe_sleep392,12296
+#  define fe_sleep(fe_sleep394,12347
+
+include/typedefs.h,632
+#define TYPEDEFS_H26,1073
+typedef unsigned char uint8_t;uint8_t33,1187
+typedef signed char   sint8_t;sint8_t34,1242
+typedef unsigned int  uint16_t;uint16_t35,1297
+typedef signed int    sint16_t;sint16_t36,1352
+typedef signed long   sint32_t;sint32_t37,1407
+typedef unsigned long uint32_t;uint32_t38,1462
+typedef Uint8  uint8_t;uint8_t42,1589
+typedef Sint8  sint8_t;sint8_t43,1613
+typedef Uint16 uint16_t;uint16_t44,1637
+typedef Sint16 sint16_t;sint16_t45,1662
+typedef Sint32 sint32_t;sint32_t46,1687
+typedef Uint32 uint32_t;uint32_t47,1712
+#define TRUE 56,1897
+#define FALSE 59,1927
+#define NULL 62,1957
+
+sysdeps/rex_sysdeps.c,526
+# define get_key(get_key34,1334
+# define get_key(get_key36,1380
+void fe_clear_area(41,1503
+void fe_fill_area(48,1629
+void fe_clear_screen(55,1752
+void fe_set_pixel(62,1860
+void fe_clear_pixel(73,2048
+void fe_draw_bitmap(83,2226
+uint16_t fe_get_buttons(122,3013
+uint8_t fe_get_stylus(129,3091
+void fe_print_xy(137,3231
+uint8_t fe_load_data(144,3390
+#define IDX_MEMO_TITLE 147,3493
+#define MEMO_TITLE 148,3518
+#define MEMO_BODY 149,3543
+void fe_init(236,5275
+void fe_finalize(244,5398
+void fe_sleep(253,5504
+
+sysdeps/sdl_rex_sysdeps.c,1066
+# define __USE_GNU30,1264
+#define BACKGROUND_COLOR 40,1535
+#define MAX_COMMAND_DIR_LEN 41,1565
+# define DIR_SEP 44,1642
+# define DIR_SEP_CHAR 45,1663
+# define DIR_SEP 47,1695
+# define DIR_SEP_CHAR 48,1729
+static SDL_Surface *p_screen;52,1765
+static TTF_Font *p_font;53,1821
+static uint16_t left=54,1846
+static uint16_t right=55,1889
+static uint16_t sel=56,1918
+static uint16_t back=57,1945
+static uint16_t exit_app=58,1973
+static uint8_t  size=59,2005
+static char command_dir[60,2085
+static Uint32 get_SDL_pixel(64,2179
+static void sdlfe_putpixel(91,2876
+static void sdlfe_draw_rex_bitmap(110,3301
+static void sdlfe_handle_event(163,4597
+void fe_clear_area(221,5602
+void fe_fill_area(233,5885
+void fe_clear_screen(245,6122
+void fe_set_pixel(250,6207
+void fe_clear_pixel(256,6300
+void fe_draw_bitmap(262,6395
+void fe_print_xy(298,7222
+uint16_t fe_wait_event(328,7860
+uint16_t fe_get_buttons(343,8163
+uint8_t fe_get_stylus(352,8330
+void fe_sleep(370,8601
+uint8_t fe_load_data(378,8720
+void fe_init(408,9546
+void fe_finalize(474,11472
+
+buildsystem/bitmap_hdr.h,26
+#define BITMAPS_H25,1020
+
+buildsystem/bitmap_tail.h,0

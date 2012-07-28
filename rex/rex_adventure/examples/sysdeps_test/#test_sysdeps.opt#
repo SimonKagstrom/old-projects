@@ -1,0 +1,1147 @@
+;* * * * *  Small-C/Plus z88dk * * * * *
+;  Version: v29-05-2002.01
+;
+;	Reconstructed for the z80 Module Assembler
+;
+;	Module compile time: Mon Sep  2 17:21:03 2002
+
+
+
+	MODULE	examples/sysdeps_test/test_sysdeps.c
+
+	INCLUDE "#z80_crt0.hdr"
+
+
+._p_grass
+	defm	""&16&""&16&""&0
+	defm	""&0
+	defm	""&0
+	defm	""&0
+	defm	"@"&0
+	defm	""&176&""&8&""&0
+	defm	""&4&""&0
+	defm	""&4&""&0
+	defm	""&0
+	defm	""&0
+	defm	""&0
+	defm	""&0
+	defm	"@"&0
+	defm	""&130&""&0
+	defm	""&128&""&16&""&0
+	defm	"("&0
+	defm	""&0
+	defm	""&0
+	defm	""&0
+	defm	""&0
+	defm	""&0
+	defm	""&1&""
+
+._p_player
+	defm	""&8&""&8&"~"&219&""&255&""&255&"~<"&28&""&8&""
+
+._p_error_bitmap
+	defm	""&20&""&10&""&0
+	defm	""&0
+	defm	""&0
+	defm	"?"&255&""&192&"\"&3&""&160&"`"&0
+	defm	"`o"&255&"``"&0
+	defm	"`O"&255&" @"&0
+	defm	" ?"&255&""&192&""&0
+	defm	""&0
+	defm	""&0
+
+
+._blit_bitmap
+	ld	hl,8	;const
+	ld	a,l
+	call	l_sxt
+	dec	sp
+	ld	a,l
+	pop	hl
+	ld	l,a
+	push	hl
+	ld	hl,0	;const
+	ld	a,l
+	call	l_sxt
+	dec	sp
+	ld	a,l
+	pop	hl
+	ld	l,a
+	push	hl
+	dec	sp
+.i_6
+	pop	hl
+	push	hl
+	ld	h,0
+	ld	de,8	;const
+	ex	de,hl
+	call	l_ult
+	jp	nc,i_7
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,0	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+.i_8
+	ld	hl,0	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,4-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	call	l_ult
+	jp	nc,i_9
+	ld	hl,9	;const
+	add	hl,sp
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	push	de
+	ld	hl,3	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	inc	hl
+	inc	hl
+	pop	de
+	add	hl,de
+	ld	l,(hl)
+	ld	h,0
+	push	hl
+	ld	hl,2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	ld	de,1
+	call	l_asl
+	pop	de
+	call	l_and
+	ld	a,h
+	or	l
+	jp	z,i_10
+	ld	hl,7	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,2-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	add	hl,de
+	push	hl
+	ld	hl,7	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,5-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	add	hl,de
+	push	hl
+	call	DsSetPixel
+	pop	bc
+	pop	bc
+.i_10
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	l,(hl)
+	ld	h,0
+	inc	hl
+	pop	de
+	ld	a,l
+	ld	(de),a
+	dec	hl
+	jp	i_8
+.i_9
+	ld	hl,1	;const
+	add	hl,sp
+	push	hl
+	ld	l,(hl)
+	ld	h,0
+	inc	hl
+	pop	de
+	ld	a,l
+	ld	(de),a
+	dec	hl
+	jp	i_6
+.i_7
+	inc	sp
+	pop	bc
+	ret
+
+
+
+._blit_bitmap2
+	push	bc
+	dec	sp
+	ld	hl,1	;const
+	add	hl,sp
+	push	hl
+	ld	hl,8	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,8	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,11	;const
+	add	hl,sp
+	push	hl
+	call	l_gint	;
+	inc	hl
+	inc	hl
+	pop	de
+	call	l_pint
+	ld	hl,2	;const
+	add	hl,sp
+	push	hl
+	ld	hl,1	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+.i_11
+	ld	hl,0	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	ld	a,h
+	or	l
+	jp	z,i_12
+	dec	sp
+	ld	hl,1	;const
+	add	hl,sp
+	push	hl
+	ld	l,(hl)
+	ld	h,0
+	dec	hl
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,0	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+.i_15
+	ld	hl,0	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,4-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	call	l_ult
+	jp	nc,i_14
+	jp	i_16
+.i_13
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	l,(hl)
+	ld	h,0
+	inc	hl
+	pop	de
+	ld	a,l
+	ld	(de),a
+	dec	hl
+	jp	i_15
+.i_16
+	ld	hl,12	;const
+	add	hl,sp
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	push	de
+	ld	hl,3	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,7-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	call	l_mult
+	push	hl
+	ld	hl,4	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,8	;const
+	call	l_div_u
+	pop	de
+	add	hl,de
+	pop	de
+	add	hl,de
+	ld	l,(hl)
+	ld	h,0
+	push	hl
+	ld	hl,2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	ld	de,1
+	call	l_asl
+	pop	de
+	call	l_and
+	ld	a,h
+	or	l
+	jp	z,i_17
+	ld	hl,10	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,2-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	add	hl,de
+	push	hl
+	ld	hl,10	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,5-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	add	hl,de
+	push	hl
+	call	DsSetPixel
+	pop	bc
+	pop	bc
+	jp	i_18
+.i_17
+	ld	hl,10	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,2-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	add	hl,de
+	push	hl
+	ld	hl,10	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,5-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	add	hl,de
+	push	hl
+	call	DsClearPixel
+	pop	bc
+	pop	bc
+.i_18
+	jp	i_13
+.i_14
+	inc	sp
+	jp	i_11
+.i_12
+	inc	sp
+	pop	bc
+	ret
+
+
+
+._test_blit
+	push	bc
+	push	bc
+	push	bc
+	push	bc
+	push	bc
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,8	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,1	;const
+	add	hl,sp
+	push	hl
+	ld	hl,8	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,2	;const
+	add	hl,sp
+	push	hl
+	ld	hl,126	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,3	;const
+	add	hl,sp
+	push	hl
+	ld	hl,219	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,4	;const
+	add	hl,sp
+	push	hl
+	ld	hl,255	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,5	;const
+	add	hl,sp
+	push	hl
+	ld	hl,255	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,6	;const
+	add	hl,sp
+	push	hl
+	ld	hl,126	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,7	;const
+	add	hl,sp
+	push	hl
+	ld	hl,60	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,8	;const
+	add	hl,sp
+	push	hl
+	ld	hl,28	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,9	;const
+	add	hl,sp
+	push	hl
+	ld	hl,8	;const
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,_p_player
+	push	hl
+	ld	hl,48	;const
+	push	hl
+	ld	hl,64	;const
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	call	_blit_bitmap2
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,64	;const
+	ld	h,0
+	push	hl
+	ld	hl,64	;const
+	ld	h,0
+	push	hl
+	ld	hl,1	;const
+	ld	h,0
+	push	hl
+	call	_fe_draw_bitmap
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,_p_grass
+	push	hl
+	ld	hl,16	;const
+	ld	h,0
+	push	hl
+	ld	hl,16	;const
+	ld	h,0
+	push	hl
+	ld	hl,0	;const
+	ld	h,0
+	push	hl
+	call	_fe_draw_bitmap
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,_p_player
+	push	hl
+	ld	hl,48	;const
+	push	hl
+	ld	hl,32	;const
+	push	hl
+	call	_blit_bitmap
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,_p_grass
+	push	hl
+	ld	hl,65	;const
+	ld	h,0
+	push	hl
+	ld	hl,19	;const
+	ld	h,0
+	push	hl
+	ld	hl,0	;const
+	ld	h,0
+	push	hl
+	call	_fe_draw_bitmap
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,_p_error_bitmap
+	push	hl
+	ld	hl,85	;const
+	ld	h,0
+	push	hl
+	ld	hl,19	;const
+	ld	h,0
+	push	hl
+	ld	hl,0	;const
+	ld	h,0
+	push	hl
+	call	_fe_draw_bitmap
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ret
+
+
+
+._test_pixel
+	ld	hl,181	;const
+	push	hl
+	ld	hl,82	;const
+	push	hl
+	call	DsSetPixel
+	pop	bc
+	pop	bc
+	ld	hl,182	;const
+	push	hl
+	ld	hl,82	;const
+	push	hl
+	call	DsSetPixel
+	pop	bc
+	pop	bc
+	ld	hl,183	;const
+	push	hl
+	ld	hl,82	;const
+	push	hl
+	call	DsSetPixel
+	pop	bc
+	pop	bc
+	ld	hl,184	;const
+	push	hl
+	ld	hl,82	;const
+	push	hl
+	call	DsSetPixel
+	pop	bc
+	pop	bc
+	ld	hl,182	;const
+	push	hl
+	ld	hl,81	;const
+	push	hl
+	call	DsClearPixel
+	pop	bc
+	pop	bc
+	ld	hl,183	;const
+	push	hl
+	ld	hl,81	;const
+	push	hl
+	call	DsClearPixel
+	pop	bc
+	pop	bc
+	ret
+
+
+
+._test_printf
+	ld	hl,65511	;const
+	add	hl,sp
+	ld	sp,hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,100	;const
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,i_1+0
+	push	hl
+	call	DsPrintf
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,104	;const
+	ld	a,l
+	call	l_sxt
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,1	;const
+	add	hl,sp
+	push	hl
+	ld	hl,101	;const
+	ld	a,l
+	call	l_sxt
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,2	;const
+	add	hl,sp
+	push	hl
+	ld	hl,106	;const
+	ld	a,l
+	call	l_sxt
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,3	;const
+	add	hl,sp
+	push	hl
+	ld	hl,0	;const
+	ld	a,l
+	call	l_sxt
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,70	;const
+	push	hl
+	ld	hl,100	;const
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,6	;const
+	add	hl,sp
+	push	hl
+	call	DsPrintf
+	ld	hl,25+2+2+2+2	;const
+	add	hl,sp
+	ld	sp,hl
+	ret
+
+
+
+._test_memo_read
+	ld	hl,65510	;const
+	add	hl,sp
+	ld	sp,hl
+	ld	hl,1	;const
+	add	hl,sp
+	push	hl
+	ld	hl,0	;const
+	ld	h,0
+	push	hl
+	ld	hl,25	;const
+	push	hl
+	call	memset
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,3	;const
+	add	hl,sp
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,25	;const
+	push	hl
+	ld	hl,i_1+8
+	push	hl
+	call	_fe_load_data
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	and	a
+	jp	z,i_19
+	ld	hl,0	;const
+	push	hl
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,i_1+18
+	push	hl
+	call	DsPrintf
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,1	;const
+	add	hl,sp
+	push	hl
+	ld	hl,2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	ld	bc,48
+	add	hl,bc
+	ld	a,l
+	call	l_sxt
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,2	;const
+	add	hl,sp
+	push	hl
+	ld	hl,0	;const
+	ld	a,l
+	call	l_sxt
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,150	;const
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	push	hl
+	ld	hl,7	;const
+	add	hl,sp
+	push	hl
+	call	DsPrintf
+	ld	hl,26+2+2+2+2	;const
+	add	hl,sp
+	ld	sp,hl
+	ret
+
+
+.i_19
+	ld	hl,0	;const
+	push	hl
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,7	;const
+	add	hl,sp
+	push	hl
+	call	DsPrintf
+	ld	hl,26+2+2+2+2	;const
+	add	hl,sp
+	ld	sp,hl
+	ret
+
+
+
+._disp_nr
+	ld	hl,65514	;const
+	add	hl,sp
+	ld	sp,hl
+	ld	hl,120	;const
+	pop	bc
+	push	hl
+.i_22
+	pop	hl
+	push	hl
+	push	hl
+	ld	hl,26	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	add	hl,hl
+	ld	de,120
+	add	hl,de
+	pop	de
+	call	l_lt
+	jp	nc,i_21
+	jp	i_23
+.i_20
+	pop	hl
+	push	hl
+	inc	hl
+	inc	hl
+	pop	bc
+	push	hl
+	jp	i_22
+.i_23
+	pop	hl
+	push	hl
+	push	hl
+	ld	hl,28	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	push	hl
+	call	DsSetPixel
+	pop	bc
+	pop	bc
+	jp	i_20
+.i_21
+	ld	hl,2	;const
+	add	hl,sp
+	push	hl
+	ld	hl,0	;const
+	ld	h,0
+	push	hl
+	ld	hl,20	;const
+	push	hl
+	call	memset
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	hl,2	;const
+	add	hl,sp
+	push	hl
+	ld	hl,26	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	push	hl
+	call	itoa
+	pop	bc
+	pop	bc
+	ld	hl,120	;const
+	push	hl
+	ld	hl,28	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,8	;const
+	add	hl,sp
+	push	hl
+	call	DsPrintf
+	ld	hl,22+2+2+2+2	;const
+	add	hl,sp
+	ld	sp,hl
+	ret
+
+
+
+._a
+	ld	hl,4	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	dec	hl
+	ex	de,hl
+	ld	hl,4-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	call	l_sub
+	ld	de,7	;const
+	ex	de,hl
+	call	l_and
+	ld	de,1
+	call	l_asl
+	ld	h,0
+	ret
+
+
+
+._b
+	ld	hl,4	;const
+	add	hl,sp
+	ld	e,(hl)
+	ld	d,0
+	ld	hl,4-2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	call	l_sub
+	ld	de,1
+	call	l_asl
+	ld	h,0
+	ret
+
+
+
+._c
+	ld	hl,2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	ld	bc,-5
+	add	hl,bc
+	ld	de,1
+	call	l_asl
+	ld	h,0
+	ret
+
+
+
+._main
+.i_26
+	ld	hl,48	;const
+	push	hl
+	call	SYSCALL0
+	pop	bc
+	call	DsClearScreen
+.i_24
+.i_25
+	call	_test_memo_read
+	call	_test_printf
+	call	_test_blit
+	call	_test_pixel
+	dec	sp
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,8	;const
+	push	hl
+	ld	hl,5	;const
+	push	hl
+	call	_a
+	pop	bc
+	pop	bc
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,80	;const
+	push	hl
+	ld	hl,2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	push	hl
+	call	_disp_nr
+	pop	bc
+	pop	bc
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,8	;const
+	push	hl
+	ld	hl,5	;const
+	push	hl
+	call	_b
+	pop	bc
+	pop	bc
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,90	;const
+	push	hl
+	ld	hl,2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	push	hl
+	call	_disp_nr
+	pop	bc
+	pop	bc
+	ld	hl,0	;const
+	add	hl,sp
+	push	hl
+	ld	hl,8	;const
+	push	hl
+	call	_c
+	pop	bc
+	ld	h,0
+	pop	de
+	ld	a,l
+	ld	(de),a
+	ld	hl,100	;const
+	push	hl
+	ld	hl,2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	push	hl
+	call	_disp_nr
+	pop	bc
+	pop	bc
+	inc	sp
+.i_27
+	ld	hl,16	;const
+	push	hl
+	call	input8
+	pop	bc
+	ld	de,1	;const
+	ex	de,hl
+	call	l_and
+	call	l_lneg
+	jp	c,i_27
+.i_28
+.i_31
+	call	DsClearScreen
+	ld	hl,48	;const
+	push	hl
+	call	SYSCALL0
+	pop	bc
+	ld	hl,66	;const
+	push	hl
+	call	SYSCALL0
+	pop	bc
+.i_29
+.i_30
+	ld	hl,0	;const
+	ret
+
+
+.i_1
+	defm	"Tjohopp"&0
+	defm	"adv_scene"&0
+	defm	"** File read failed! **: "&0
+
+
+; --- Start of Static Variables ---
+
+DEFVARS	-1
+{
+}
+
+
+; --- Start of Scope Defns ---
+
+	LIB	malloc
+	LIB	getlarge
+	LIB	strcmp
+	LIB	DsDisplayCircle
+	LIB	output8
+	LIB	strcpy
+	XDEF	_blit_bitmap
+	LIB	strlen
+	LIB	strdup
+	LIB	labs
+	LIB	atoi
+	XREF	_fe_load_data
+	LIB	memchr
+	LIB	free
+	XDEF	_main
+	LIB	memcmp
+	LIB	DsPrintf
+	XDEF	_test_printf
+	LIB	DbReadText
+	LIB	memcpy
+	LIB	strpos
+	LIB	strlwr
+	XREF	_fe_del_event
+	LIB	realloc_down
+	LIB	strtok
+	LIB	strtol
+	LIB	strspn
+	LIB	DbGetRecordCount
+	LIB	exit
+	LIB	SYSCALL0
+	LIB	SYSCALL1
+	LIB	rand
+	LIB	SYSCALL2
+	LIB	strstr
+	LIB	itoa
+	LIB	strupr
+	LIB	SYSCALL3
+	LIB	SYSCALL4
+	LIB	SYSCALL5
+	LIB	SYSCALL6
+	LIB	memset
+	LIB	input8
+	LIB	DsClearPixel
+	LIB	stricmp
+	XDEF	_blit_bitmap2
+	XDEF	_a
+	XDEF	_b
+	XDEF	_c
+	LIB	SYSCALLEXL
+	LIB	strncat
+	LIB	strcspn
+	LIB	DbUpdateField
+	LIB	strstrip
+	LIB	farcall
+	LIB	heapinit
+	LIB	strncmp
+	LIB	DbDeleteText
+	XDEF	_p_player
+	LIB	DsGetPixelAddr
+	LIB	strncpy
+	LIB	strpbrk
+	LIB	abs
+	LIB	reverse
+	LIB	strrchr
+	LIB	calloc
+	XREF	_fe_add_event
+	XDEF	_p_grass
+	XDEF	_test_pixel
+	XDEF	_test_memo_read
+	LIB	DsTrace
+	LIB	SYSCALL4D
+	LIB	DbUpdateRecord
+	LIB	DsClearScreen
+	LIB	DsFillScreen
+	LIB	SYSCALL1P
+	LIB	SYSCALL5P
+	LIB	mkdir
+	LIB	SYSCALL6P
+	LIB	strtoul
+	LIB	strrstr
+	XDEF	_p_error_bitmap
+	LIB	SYSCALLEX
+	LIB	DbReadRecord
+	XREF	_fe_wait_event
+	LIB	DsDisplayEllipse
+	LIB	sleep
+	LIB	srand
+	LIB	findlib
+	XREF	_fe_draw_bitmap
+	LIB	strrstrip
+	XDEF	_disp_nr
+	LIB	DsSetPixel
+	LIB	DbFindRecord
+	LIB	DbInsertRecord
+	LIB	atexit
+	LIB	getcwd
+	XDEF	_test_blit
+	LIB	DbReadField
+	LIB	strnicmp
+	LIB	getfree
+	LIB	DbInsertText
+	LIB	strcat
+	LIB	strchr
+
+
+; --- End of Scope Defns ---
+
+
+; --- End of Compilation ---

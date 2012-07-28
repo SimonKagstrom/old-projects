@@ -1,0 +1,48 @@
+0.1
+---
+
+Hello!
+
+I'd like to announce the inital release of the "REX Adventure"
+adventure game library. REX Adventure is a REX library for writing
+Zelda/Monkey Island-style games (a mixture of both kinds), for running
+on the REX or on a host machine with libSDL. REX Adventure is actually
+two libraries:
+
+advlib/ - A graphics support library for REX Adventure. Draws maps and
+          blits sprites.
+advglib/ - (Notice the 'g' :-)) The actual adventure game library.
+
+advglib depends on advlib, but advlib can be used without advglib. A
+"development environment" is also provided, that implements an
+abstraction layer between the REX-specific functions and the platform
+independent code. The library therefore is also available for libSDL
+on UNIX (possibly windows) systems.
+
+An example game is also provided. Screenshots from that can be seen on
+my homepage.
+
+The library is released under the GNU GPL, and can be downloaded from
+my homepage:
+
+http://www.student.lu.se/~etn97ksi/sim_home/rex.html
+
+
+
+--------
+Now for some things to watch out when you try it:
+
+* The game is a bit slow still, but I hope to be able to speed it up
+  sometime.
+* See the INSTALL document before testing the game - you need to
+  download two memos to the REX as well.
+* I have only tried the library/game in the emulator (no access to
+  my docking station right now). It works in the emulator, but if it
+  does not work on the real thing, I suspect memo-reading...
+* If someone would like to try to program for it, I'd be happy to
+  help. Note that to compile the library, you might need to recompile
+  z88dk/rexdk.
+
+Have fun!
+
+// Simon, ska@bth.se

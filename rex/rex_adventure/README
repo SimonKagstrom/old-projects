@@ -1,0 +1,8 @@
+Herein lies two adventure-style libraries and a "development
+environment" for REX programs.
+
+advlib/       An adventure support library.
+advglib/      An adventure library.
+sysdeps/      REX development environment (for REX and libSDL).
+examples/     Some examples of the libraries here.
+

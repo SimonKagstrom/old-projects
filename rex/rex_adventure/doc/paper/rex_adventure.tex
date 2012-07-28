@@ -1,0 +1,128 @@
+\documentclass[a4wide]{article}
+\usepackage[dvips]{graphicx}
+\usepackage[T1]{fontenc}
+\pagestyle{empty}
+
+\begin{document}
+\section{Introduction}
+
+% Event-based API
+% Save space
+%  No error checks (almost)
+%  Simple structures, i.e. lines are also of equal length
+%  16 objects, only one pos possible.
+% SDL development library
+% Uses library
+
+
+% Describe different fields (in a screenshot)
+% Terminology, user - player etc
+
+\section{Game implementation}
+
+\subsection{Examples}
+
+\subsubsection{Looking at the scene in general}
+The goal here is to look at the current scene in general. Looking can of course
+also be done at special parts of the scene, i.e. event-points, and
+event-handling is described later. Looking in general is easily done - simply
+check if \verb&action& is look and then display a message depending on which
+scene the user is on. However, this will require fairly much code, so a more
+general solution can be used instead.
+
+The idea we use is that the scenes are numbered from 0 to width*height-1 (of the
+map. If we then place the scene-descriptions adajcent to each other in the
+message file, we can handle all general looks in one place. The code is shown in
+figure \ref{fig:look_scene}.
+
+The event we use is the PLAYER\_STOP event. This is raised each time the player
+stops walking. In the event-handler, we check for the PLAYER\_STOP event. We
+thereafter call the specific handler for these events, i.e.
+\verb&handle_player_stops_events()&.  In this function, we check if the action
+is look, and if so displays a message. The scene-describing messages are always
+2 lines long here, and start at SCENE\_MESSAGES\_START (which is chosen so that
+we have 16 object-descriptions before.
+
+\begin{figure}
+  \scriptsize
+\begin{verbatim}
+#define SCENE_MESSAGES_START 17
+
+void advg_handle_event(advg_game_t *p_game, advg_event_t event)
+{
+  ...
+  if (ADVG_EVENT_IS(event, ADVG_EVENT_PLAYER_STOP))
+    handle_player_stops_events(p_game);
+}
+
+static void handle_player_stops_events(advg_game_t *p_game)
+{
+  switch(p_game->action)
+    {
+    case ADVG_ACTION_LOOK:
+      advg_display_message(p_game, p_game->scene*2+SCENE_MESSAGES_START, 2);
+      break;
+    ...
+    }
+}
+\end{verbatim}
+  \label{fig:look_scene}
+  \caption{Code to look at the scene}
+\end{figure}
+
+
+\subsubsection{Use an object on the player}
+The goal here is to react when an object is used on the player, for instance if
+the player drinks a potion. This would be represented by a press on \emph{use},
+followed by a press on the object in the object-field and thereafter on the
+player.
+
+The code to use an object on the player can be seen in figure
+\ref{fig:obj_on_player}. In the event-handler, it is first checked if the event
+is a player-event, i.e.  if there was a press on the player. If this is the
+case, \verb&handle_player_events()& is invoked. Note that the event-handler
+becomes cleaner if the actual event-handling is done in functions outside it.
+
+In the \verb&handle_player_events()& function, we first check if the current
+action is \emph{use}. If \emph{use} was pressed, we continue by checking the
+object number. If the user did not press an object after use, for instance
+instead pressing the player directly or if the player did not have the object,
+\verb&obj_use& will be 0. Otherwise, \verb&obj_use& will have a value between 1
+and 16, depending on which object was pressed.
+
+For the sequence of \emph{use}, first object, player was pressed, the
+implementation should therefore be placed below \verb&case 1:& in figure
+\ref{fig:obj_on_player}.
+
+\begin{figure}
+  \scriptsize
+\begin{verbatim}
+void advg_handle_event(advg_game_t *p_game, advg_event_t event)
+{
+  ...
+  if (ADVG_EVENT_IS(event, ADVG_EVENT_PLAYER))
+    handle_player_events(p_game); /* Player-event */
+}
+
+static void handle_player_events(advg_game_t *p_game)
+{
+  if (p_game->action == ADVG_ACTION_USE)
+    {
+      switch (p_game->obj_use)
+        {
+        case 0: /* No object pressed */
+          break;
+        case 1: /* First object */
+        ...
+        }
+    }
+  else
+    ...
+}
+\end{verbatim}
+  \normalsize
+  \label{fig:obj_on_player}
+  \caption{Code to use an object on the player}
+\end{figure}
+
+\end{document}

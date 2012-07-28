@@ -1,0 +1,35 @@
+APPNAME Arkanoid v0.9.1
+COMMENT Arkanoid game
+ICON
+....XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX....
+..XX................................XX..
+.X...X.XXXX.XXXX.XXXX.XXXX.XXXX.XXX...X.
+.X....................................X.
+X..XXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX..XX
+X.....................................XX
+X.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX..XX
+X.....................................XX
+X.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX..XX
+X.....................................XX
+X.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX..XX
+X.....................................XX
+X.XXXX................XXXX......XXXX..XX
+X.....................................XX
+X.XXXX..........................XXXX..XX
+X...........................XX........XX
+X...........................XX........XX
+X...........................XX........XX
+X.....................................XX
+X...........XX........................XX
+X..........XX.X.......................XX
+X..........XXXX.......................XX
+X...........XX........................XX
+X.....................................XX
+X.....................................XX
+X.....................................XX
+X.....................................XX
+X..............XXXXX..................XX
+.X............XXXXXXX................XXX
+.X..................................XXX.
+..XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..
+....XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...

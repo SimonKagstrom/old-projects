@@ -1,0 +1,54 @@
+0.9 -> 0.9.1
+* Changed the name of the level-file to Zarkanoid.txt instead.
+* Maximum number of lives is now 5 (and default is 4)
+* Runs in the emulator at least :-), applied some nasty tricks to have
+  it compile correctly with zcc
+
+0.4 -> 0.9
+* Ported arkanoid to the new libfe REX abstraction layer. Should be
+  easier to extend now.
+* More "realistic" ball bouncing
+* New graphics (not sure if it's actually better now, but...)
+* Misc. code cleanup
+* Makefile is now a bit more intelligent, but also more UNIX
+  specific
+* Removed cvs logs
+* Redraw the number of lives when the player takes an extra-life
+  special
+* Fixed the README
+
+
+0.3 -> 0.4
+* Added 6 levels (now 20 levels total).
+* Level skipping is done 5 levels at a time.
+
+0.2 -> 0.3
+
+* Added floor-special. A floor protects the ball from falling
+  out of the field for three times.
+* Simplified the SDL-frontend.
+* Added touch screen support for the REX frontend.
+* Removed a graphical glitch when the ball exits the screen.
+* Added comments on a few places in the code in order to make it
+  more readable.
+* Reorganized some code in order to save some bytes of code. There
+  is now about 15 bytes of code left to implement stuff in :-)
+
+
+0.1 -> 0.2
+
+* Now loads levels from a file. Allows for up to 99 levels.
+* Better distribution of specials.
+* Sticky and destroyer specials now disappears after a while.
+* The game does not slow down as much when several things are
+  moving as it used to.
+* Faster gameplay
+* The playing field has grown by one block horizontally.
+* Added "impossible" blocks (demands 255 hits to be destroyed)
+  This is buggy.
+* Lots of code rework.
+
+
+0.1
+
+* Initial release

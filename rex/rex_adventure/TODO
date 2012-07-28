@@ -1,0 +1,20 @@
+rex_sysdeps.c:
+  * Reimplement fe_draw_bitmap() in assembly
+    - Current solution is slow.
+    - Also fix drawing of width == 32
+
+advgame.c:
+  * When on an event point, the current action is executed before the player stops.
+  *Drop object is not possible when on an event-point.
+    - Remove drop?
+
+library issues:
+  * The library cannot call functions within itself (offset problems)
+    - Can this be solved by only changing the offset of the wrapper functions?
+    - Solved
+
+
+
+Sometime:
+  * Move sysdeps.h to sysdeps/include/sysdeps/ or felib/include/felib/ or
+    something.

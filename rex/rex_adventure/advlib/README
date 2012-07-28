@@ -1,0 +1,5 @@
+Advlib is an adventure game support library for the REX 6000. It
+provides a way to load maps and can draw sprites on top of the
+background (with some areas transparent).
+
+See the documentation in doc/html/ for more information about advlib.

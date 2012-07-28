@@ -1,0 +1,4 @@
+This is an empty advglib-game. It does nothing and will not even start.
+
+It can be used as a template for development with advglib. It is also
+useful for checking the compiled size of the advglib REX binary.

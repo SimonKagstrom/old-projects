@@ -1,0 +1,7 @@
+Advglib is a library for adventure games for the REX 6000. It provides
+most functionality for point-and-click style adventure games. The
+programmer needs to implement the main-method and an event-handler to
+create a game using advglib.
+
+See the documentation in doc/html/ for more information about advglib.
+
