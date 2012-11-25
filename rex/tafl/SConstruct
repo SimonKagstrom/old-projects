@@ -1,0 +1,19 @@
+#-*-Python-*-#########################################################
+##
+## Copyright (C) 2006,  Blekinge Institute of Technology
+##
+## Filename:      SConstruct
+## Author:        Simon Kagstrom <ska@bth.se>
+## Description:   scons constructor
+##
+## $Id: SConstruct 8092 2006-05-12 07:28:03Z ska $
+##
+######################################################################
+SConscript("../RulesScons.py")
+Import("*")
+
+sources     = Split("main.c playfield.c utils.c")
+
+SDLEnv.Program('tafl', sources + Split("sysdeps/sdl_rex_sysdeps.c"),
+	       CPPPATH = Split("sysdeps/include"),
+	       LIBS=Split("SDL SDL_ttf"))

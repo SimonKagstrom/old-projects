@@ -1,0 +1,14 @@
+-mux
+-z
+-k /usr/local/share/sdcc/lib/librex
+-k /usr/local/share/sdcc/lib/z80
+-l librex
+-l z80
+-b _CODE=0x8000
+-b _DATA=0xf000
+tafl
+crt0.z80.o
+playfield.z80.o
+main.z80.o
+utils.z80.o
+rex_sysdeps.z80.o
