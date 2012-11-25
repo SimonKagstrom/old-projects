@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MophunGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mophun.com/files/MophunGame.xsd">
+  <CertificationInformation>
+    <Title>Vindaloo</Title>
+    <GameID>0</GameID>
+    <Version>1.0</Version>
+    <Language>EN</Language>
+    <DeviceCompatibility>
+      <Category2/>
+    </DeviceCompatibility>
+    <DRM>
+      <IMEILockOptional/>
+    </DRM>
+    <BusinessModel>
+      <PayPerDownload>
+        <Game>
+          <GameFile>
+            <ID>1</ID>
+            <Filename>vindaloo.mpn</Filename>
+          </GameFile>
+        </Game>
+      </PayPerDownload>
+    </BusinessModel>
+  </CertificationInformation>
+</MophunGame>

@@ -1,0 +1,10 @@
+#-*-sh-*-
+
+# Type is one of
+#  explosion
+#  growing_wall
+#  elem_generator
+type: explosion
+
+# Where to explode
+point: 9, 1

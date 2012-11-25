@@ -1,0 +1,33 @@
+# -*- sh -*-
+# Number of diamonds required
+diamonds:  20
+# Time to finish the level
+time:      150
+# Where the player starts
+point:     1, 1
+# Specials (user 0 ... 5)
+#user: 0 1 2
+# The level data
+data:
+WWWWWWWWWWWWWWWWWWWWWWW
+W...dW.....o........t.W
+W....W..... ...ooo...dW
+W....W..WW. ...oo...o.W
+W....W..dW.o...o....o.W
+W....W.WWW. .. .......W
+W.......... ..  ......W
+W.......... ..  ......W
+W...dd  ...G..  ...o..W
+W...WWWWWWW...  ......W
+W...WW...E..---G......W
+W.o.WW........  ......W
+W.......... o. .......W
+Wo...o..... o.....o.b.W
+W.....o....W..W..Wddb.W
+W...d...t..Wd.W..W....W
+W..........Wd.W.o..oooW
+WWWWWW.....WB.Wo....o.W
+Wdd..l..o......o......W
+Wd...W.....d.....d o.tW
+Wd...r...........d....W
+WWWWWWWWWWWWWWWWWWWWWWW

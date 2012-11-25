@@ -1,0 +1,25 @@
+//#include <datacert.h>
+
+INFO METAINFO
+{
+  "Title"               : "Bruce Lee"
+  "Vendor"              : "Simon Kågström"
+  "Copyright info"      : "(c) Simon Kågström 2004"
+  "Program version"     : "1.0"
+  "Help"                : "www.bth.se"
+}
+
+SPRITE_FRAMES    PACKED SPRITE      FORMAT RGB332     "gfx/sprites.bmp"
+TITLE_SCREEN     PACKED SPRITE      FORMAT RGB332     "gfx/title_screen.bmp"
+BRUCE_MIDI       PACKED DATA "audio/bruce.mid"
+
+
+SECTION DATA
+// *****************************************
+// THE FONT
+// *****************************************
+SMALL_FONT       DATA                          "gfx/systemfont4x6.fnt"
+
+// Tiles and sprites
+//
+BG_TILES         TILESET 8 8 FORMAT RGB332     "gfx/tiles.bmp"
