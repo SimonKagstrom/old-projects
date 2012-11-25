@@ -1,0 +1,29 @@
+CONV2REX
+--------
+conv2rex converts images to REX 6000 bitmaps (to include in
+c-files), REX binary files and icon (resurce files). White in
+the image is assumed to be clear areas, black filled. The images
+can have any pixeldepth and be of any format supported by 
+SDL_Image.
+
+Usage:
+conv2rex [options] infile outfile
+
+Options are:
+-h                This text
+-c                Create C-source (default) file
+-i                Create icon (resource) file
+-b                Create binary file
+-s                Create stripped binary file (no width/height. Used
+                  for the icons etc)
+-u                Use uint8_t instead of char (only if not binary file)
+-n NAME           Specify the name of the bitmap (normally p_image)
+
+
+INSTALLING
+----------
+UNIX:
+ run make. GNU Make is required.
+
+
+// Simon Kågström, simonk@df.lth.se

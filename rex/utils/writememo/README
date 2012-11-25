@@ -1,0 +1,44 @@
+This is a memo-file writer for the REX 6000 emulator.
+
+It contains two parts, a generator and a REX 6000 addin that writes
+the memo. Run generator -h for a complete description of options.
+
+
+Usage
+-----
+0. Compile the generator (if it is not already done)
+   - in UNIX run make generator
+
+
+1. generate the header-file with the data to write:
+   - in UNIX this is done as:
+
+     $ ./generate FILE1 FILE2 ... > src/file.h
+
+   - in DOS/Windows this is:
+
+     $ generate.exe FILE1 FILE2 ... > src/file.h
+
+   (the files given on the input line will be concatenated for the REX memo)
+
+
+2. Create the addin
+   - run make in UNIX
+   - run make.bat for windows
+   - or compile it manually:
+     $ zcc +rex -vn -create-app -o writememo.bin src/writememo.c
+
+
+3. Create a emulator-addin:
+   - run bin2mot or something like that.
+
+
+4. Run the addin in the emulator
+   - This should create the memo (it will tell you if it fails)
+
+
+5. Reset the addin (do not quit), compile your own addin and press LDPROG
+   in the emulator.
+
+
+// Simon Kågström, simonk@df.lth.se
