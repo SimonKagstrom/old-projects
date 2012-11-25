@@ -55,4 +55,3 @@ A bottle is on the table.
 You take the bottle.                            
 You apply MrProper to the coins. They coins are 
 now shining brightly.                           
-

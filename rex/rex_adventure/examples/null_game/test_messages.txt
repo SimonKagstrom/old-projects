@@ -1,0 +1,36 @@
+The rope looks strong.                  
+The fruit is red and looks juicy.       
+The potion has a strange red shimmer.   
+....                                    
+..                                      
+....                                    
+..                                      
+....                                    
+..                                      
+....                                    
+..                                      
+....                                    
+..                                      
+....                                    
+..                                      
+..                                      
+You are dead. Better luck next time!    
+Why would you want to do that?          
+You pick up the item.                   
+You drop the item.                      
+You cannot take that.                   
+That is not the way to use the item.    
+I see nothing special about that.       
+....   0                                
+..                                      
+....   1                                
+..                                      
+....   2                                
+..                                      
+A road continues north. There are trees 
+here, one of them seems to have fruits. 
+A desert continues to the east, north   
+and south.                              
+Red fruits can be seen high in the tree.
+You throw the rope around a branch high 
+in the tree, climb up and take a fruit. 

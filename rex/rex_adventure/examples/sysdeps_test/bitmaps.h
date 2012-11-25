@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: bitmaps.h,v 1.4 2002/09/11 19:38:43 simon Exp $
+ * $Id: bitmaps.h 6264 2006-01-21 09:46:06Z ska $
  *
  *********************************************************************/
 

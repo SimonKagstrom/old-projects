@@ -1,5 +1,5 @@
 /*********************************************************************
- * Copyright (C) 2001-2002 Simon Kagstrom
+ * Copyright (C) 2001-2007 Simon Kagstrom
  *
  * Filename:      sdl_rex_sysdeps.c
  * Description:   This file contains the implementation of the
@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: sdl_rex_sysdeps.c,v 1.11 2003/02/16 11:37:44 ska Exp $
+ * $Id: sdl_rex_sysdeps.c 15695 2007-07-02 10:58:43Z ska $
  *
  *********************************************************************/
 #include <stdio.h>         /* printf */
@@ -49,6 +49,7 @@
 #endif
 
 
+static uint8_t screen_data[(240 * 120) / 8];
 static SDL_Surface *p_screen;     /* The framebuffer */
 static TTF_Font *p_font;
 static uint16_t left=FALSE;     /* Keys */
@@ -56,7 +57,7 @@ static uint16_t right=FALSE;
 static uint16_t sel=FALSE;
 static uint16_t back=FALSE;
 static uint16_t exit_app=FALSE;
-static uint8_t  size=1;         /* The size multiplication for drawing stuff */
+static uint8_t  size=3;         /* The size multiplication for drawing stuff */
 static char command_dir[MAX_COMMAND_DIR_LEN];
 
 /* Helpers */
@@ -259,40 +260,136 @@ void fe_clear_pixel(uint8_t x, uint8_t y)
   SDL_Flip(p_screen);
 }
 
+#define LINE_WIDTH (240 / 8)
+/*
+ * The code here looks stupid, but it's really just to get efficient
+ * Z80 code with ZCC.
+ */
 void fe_draw_bitmap(uint8_t *p_bitmap, uint8_t x, uint8_t y, uint8_t inverted)
 {
-  uint8_t byte_w;
-  uint8_t w;
-  uint8_t h;
+  uint8_t w, h;
+  int j;
+  int x_off = x & 7;
+  int b2_x_off = (8 - x_off);
+  int byte_width;
+  int byte_mask;
+  uint8_t *p_dst_start = ((uint8_t*)screen_data) + (x >> 3) + y * LINE_WIDTH;
 
-  sdlfe_draw_rex_bitmap(p_bitmap, x,y, inverted);
-  SDL_Flip(p_screen);
-  return;
-
-  /* Get the width and height of the image to draw */
   w = p_bitmap[0];
   h = p_bitmap[1];
   p_bitmap += 2;
-  byte_w = (w>>3)-1; /* w/8-1 (to get the shift number below) */
 
-  /* Draw each row of the bitmap */
-  while (h > 0)
+  byte_width = w >> 3; /* w / 8, for ZCC */
+  /* Invert to handle the more common case with only b1 valid without
+   * doing the complement */
+  byte_mask = ~((1 << x_off) - 1);
+
+  if (inverted)
+    inverted = 0xff;
+
+  /* Iterate through the source */
+  for (j = 0; j < h; j++)
     {
+      uint8_t *b1 = p_dst_start + j * LINE_WIDTH;
+      int y_offset = j * byte_width;
       int i;
 
-      h--;
-      /* For every pixel in the row */
-      for(i=w-1; i>=0; i--)
+      /* For every byte */
+      for (i = 0; i < byte_width; i++, b1++)
 	{
-	  /* Turn the pixel on if it is set in the bitmap and if non-inverted mode is selected */
-	  if ( ((p_bitmap[(h<<byte_w) + (i>>3)] & (1 << ( ((w-1)-i) & 7))) >= 1) - inverted > 0)
-	    sdlfe_putpixel(x+i,y+h, 1);
-	  else
-	    sdlfe_putpixel(x+i,y+h, 0);
+          uint8_t bitmap_byte = p_bitmap[y_offset + i] ^ inverted;
+
+	  /* x == 4, x_off = 4
+	   * What is the order of the bits on the screen?
+	   *
+	   *       Case 1                  Case 2
+	   *              111111                 111111
+	   *  01234567  89012345     01234567  89012345
+	   *
+	   *  01234567  01234567     76543210  76543210
+	   *  ________  ________     ________  ________
+	   * |    XXXX||XXXX    |   |XXXX    ||    XXXX|
+	   * |    XXXX||XXXX    |   |XXXX    ||    XXXX|
+	   * |    XXXX||XXXX    |   |XXXX    ||    XXXX|
+	   * |____XXXX||XXXX____|   |XXXX____||____XXXX|
+	   *   b1          b2         b1          b2
+           *
+           *
+           * x == 3, case 1
+	   *              111111
+	   *  01234567  89012345
+	   *
+	   *  01234567  01234567
+	   *  ________  ________
+	   * |   XXXXX||XXX    |
+	   * |   XXXXX||XXX    |
+	   * |   XXXXX||XXX    |
+	   * |___XXXXX||XXX____|
+	   *   b1          b2
+	   *
+	   * X is the current source byte, b1 and b2 the two
+	   * destination bytes. We assume that the bitmap is in-bounds
+	   * (i.e. we never cross to the next destination line).
+	   */
+
+	  /* Case 2 */
+	  *b1 = (*b1 & byte_mask) | (bitmap_byte >> x_off);
+          if (x_off != 0)
+            {
+              uint8_t *b2 = b1 + 1;
+
+              *b2 = (*b2 & ~byte_mask) | (bitmap_byte << b2_x_off);
+            }
 	}
     }
 
+  {
+    uint8_t width = w;
+    uint8_t height = h;
+    int xpos,ypos;
+
+    for (ypos = y; ypos < y + height; ypos++)
+      {
+        for (xpos = x; xpos < x + width; xpos++)
+          {
+            uint8_t curr = screen_data[ ypos * LINE_WIDTH + xpos/8];
+            int bit_on = ( curr & (0x80 >> (xpos & 7)) ) != 0;
+
+            if (bit_on)
+              sdlfe_putpixel(xpos, ypos, 1);
+            else
+              sdlfe_putpixel(xpos, ypos, 0);
+          }
+      }
+  }
   SDL_Flip(p_screen);
+}
+void _fe_draw_bitmap(uint8_t *p_bitmap, uint8_t xpos, uint8_t ypos, uint8_t mode)
+{
+#if defined SDCC || 1
+  uint8_t width = p_bitmap[0];
+  uint8_t height = p_bitmap[1];
+  int byte_w = (width/8) + (width & 7 ? 1 : 0);
+  int x,y;
+
+  for (y=0; y<height; y++)
+    {
+      for (x=0; x<width; x++)
+	{
+	  uint8_t curr = p_bitmap[ (y * byte_w + x/8) + 2];
+	  int bit_on = ( curr & (0x80 >> (x & 7)) ) != 0;
+
+	  if (bit_on ^ mode)
+	    fe_set_pixel(xpos + x, ypos + y);
+	  else
+	    fe_clear_pixel(xpos + x, ypos + y);
+	}
+    }
+#else
+#asm
+#include "draw_bitmap.S"
+#endasm
+#endif /* SDCC */
 }
 
 void fe_print_xy(uint8_t x, uint8_t y, uint8_t mode, char *p_str)

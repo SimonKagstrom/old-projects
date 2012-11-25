@@ -1,4 +1,4 @@
-;;; Copyright (C) 2002,  Simon Kagstrom
+;;; Copyright (C) 2002-2003,  Simon Kagstrom
 ;;;
 ;;;  Filename:     draw_bitmap.S
 ;;;  Description:  Assembly implementation of fe_draw_bitmap()

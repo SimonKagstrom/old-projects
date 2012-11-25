@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: null_game.c,v 1.6 2002/11/09 11:25:57 ska Exp $
+ * $Id: null_game.c 6264 2006-01-21 09:46:06Z ska $
  *
  ********************************************************************/
 #include "sysdeps.h"           /* fe_init() etc */

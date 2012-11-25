@@ -5,7 +5,7 @@ rex_sysdeps.c:
 
 advgame.c:
   * When on an event point, the current action is executed before the player stops.
-  *Drop object is not possible when on an event-point.
+  * Drop object is not possible when on an event-point.
     - Remove drop?
 
 library issues:

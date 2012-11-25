@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: advg_rex_lib.c,v 1.7 2002/10/21 17:02:14 simon Exp $
+ * $Id: advg_rex_lib.c 6264 2006-01-21 09:46:06Z ska $
  *
  *********************************************************************/
 #include <rex/rex.h>

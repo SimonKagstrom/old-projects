@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: advgame_bitmaps.h,v 1.3 2002/11/09 09:16:26 ska Exp $
+ * $Id: advgame_bitmaps.h 6264 2006-01-21 09:46:06Z ska $
  *
  *********************************************************************/
 

@@ -1,5 +1,5 @@
 /*********************************************************************
- * Copyright (C) 2001, 2003-2002  Simon Kagstrom
+ * Copyright (C) 2001, 2003, 2006-2007-2004-2002  Simon Kagstrom
  *
  * Filename:      rex_sysdeps.c
  * Description:   This file contains the implementation of the
@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: rex_sysdeps.c,v 1.11 2003/02/16 11:39:01 ska Exp $
+ * $Id: rex_sysdeps.c 15695 2007-07-02 10:58:43Z ska $
  *
  *********************************************************************/
 #include <stdlib.h>         /* abs, rand */
@@ -80,41 +80,89 @@ void fe_clear_pixel(uint8_t x, uint8_t y)
 }
 #endif
 
+#define LINE_WIDTH (240 / 8)
+/*
+ * The code here looks stupid, but it's really just to get efficient
+ * Z80 code with ZCC. This *only* works when the bitmaps are 8-bit
+ * aligned in width.
+ */
 void fe_draw_bitmap(uint8_t *p_bitmap, uint8_t x, uint8_t y, uint8_t inverted)
 {
-#if defined SDCC || 1
-  uint8_t byte_w;
-  uint8_t w;
-  uint8_t h;
+  uint8_t w, h;
+  int j;
+  int x_off = x & 7;
+  int b2_x_off = (8 - x_off);
+  int byte_width;
+  int byte_mask;
+  uint8_t *p_dst_start = (uint8_t*)0xa000 + (x >> 3) + y * LINE_WIDTH;
 
-  /* Get the width and height of the image to draw */
   w = p_bitmap[0];
   h = p_bitmap[1];
   p_bitmap += 2;
-  byte_w = (w>>3)-1; /* w/8-1 (to get the shift number below) */
 
-  /* Draw each row of the bitmap */
-  while (h > 0)
+  byte_width = w >> 3; /* w / 8, for ZCC */
+  /* Invert to handle the more common case with only b1 valid without
+   * doing the complement */
+  byte_mask = ~((1 << x_off) - 1);
+
+  if (inverted)
+    inverted = 0xff;
+
+  /* Iterate through the source */
+  for (j = 0; j < h; j++)
     {
+      uint8_t *b1 = p_dst_start + j * LINE_WIDTH;
+      int y_offset = j * byte_width;
       int i;
 
-      h--;
-      /* For every pixel in the row */
-      for(i=0; i<w; i++)
+      /* For every byte */
+      for (i = 0; i < byte_width; i++, b1++)
 	{
-	  /* Turn the pixel on if it is set in the bitmap and if non-inverted mode is selected */
-	  if ( ((p_bitmap[(h<<byte_w) + (i>>3)] & (1 << ( ((w-1)-i) & 7))) >= 1) - inverted > 0)
-	    fe_set_pixel(x+i, y+h);
-	  else
-	    fe_clear_pixel(x+i, y+h);
+          uint8_t bitmap_byte = p_bitmap[y_offset + i] ^ inverted;
+
+	  /* x == 4, x_off = 4
+	   * What is the order of the bits on the screen?
+	   *
+	   *       Case 1                  Case 2
+	   *              111111                 111111
+	   *  01234567  89012345     01234567  89012345
+	   *
+	   *  01234567  01234567     76543210  76543210
+	   *  ________  ________     ________  ________
+	   * |    XXXX||XXXX    |   |XXXX    ||    XXXX|
+	   * |    XXXX||XXXX    |   |XXXX    ||    XXXX|
+	   * |    XXXX||XXXX    |   |XXXX    ||    XXXX|
+	   * |____XXXX||XXXX____|   |XXXX____||____XXXX|
+	   *   b1          b2         b1          b2
+           *
+           *
+           * x == 3, case 1
+	   *              111111
+	   *  01234567  89012345
+	   *
+	   *  01234567  01234567
+	   *  ________  ________
+	   * |   XXXXX||XXX    |
+	   * |   XXXXX||XXX    |
+	   * |   XXXXX||XXX    |
+	   * |___XXXXX||XXX____|
+	   *   b1          b2
+	   *
+	   * X is the current source byte, b1 and b2 the two
+	   * destination bytes. We assume that the bitmap is in-bounds
+	   * (i.e. we never cross to the next destination line).
+	   */
+
+	  /* Case 2 */
+	  *b1 = (*b1 & byte_mask) | (bitmap_byte >> x_off);
+          if (x_off != 0)
+            {
+              uint8_t *b2 = b1 + 1;
+
+              *b2 = (*b2 & ~byte_mask) | (bitmap_byte << b2_x_off);
+            }
 	}
     }
-
-#else
-#asm
-#include "draw_bitmap.S"
-#endasm
-#endif /* SDCC */
 }
 
 #if !FE_REX_OPT

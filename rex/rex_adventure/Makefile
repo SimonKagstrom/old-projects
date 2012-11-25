@@ -35,7 +35,7 @@ mv              = mv
 RMOPTS          = -f
 
 # SDL config.
-SDL_CFLAGS	:= $(shell sdl-config --cflags) -DADVG_DEBUG
+SDL_CFLAGS	:= $(shell sdl-config --cflags) # -DADVG_DEBUG
 SDL_LDFLAGS	:= $(shell sdl-config --libs)
 
 INCLUDES        = -I. -Iinclude/ -Iadvglib/include/ -Iadvlib/include
@@ -49,7 +49,7 @@ SDCC_LIB_CFLAGS += -mz80
 SDCC_LDFLAGS    += -- -mux -z -k /home/simon/sdcc/rxsdk/lib -l z80 -l librex -b _CODE=0x8000 -b _DATA=0xf000
 SDCC_ADDINFLAGS  = -c
 
-ZCC_CFLAGS      = +rex -O1 -vn -create-app -D_NOFLOAT_ -DTARGET_REX $(INCLUDES) $(DEFINES)
+ZCC_CFLAGS      = +rex -O1 -vn -create-app -D_NOFLOAT_ -DTARGET_REX $(INCLUDES) $(DEFINES) -I$(Z80_OZFILES)../include
 ZCCLIB_CFLAGS   += +rexlib -O1 -vn -create-app -D_NOFLOAT_ -DTARGET_REX $(INCLUDES) $(DEFINES)
 
 

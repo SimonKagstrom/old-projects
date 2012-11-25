@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: example_game.c,v 1.14 2003/02/23 12:21:57 ska Exp $
+ * $Id: example_game.c 3175 2005-07-07 13:32:32Z ska $
  *
  ********************************************************************/
 

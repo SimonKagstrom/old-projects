@@ -1,5 +1,5 @@
 /*********************************************************************
- * Copyright (C) 2002-2003,  Simon Kagstrom
+ * Copyright (C) 2002, 2007-2003,  Simon Kagstrom
  *
  * Filename:      sysdeps_test.c
  * Description:   A test program for the sysdeps.
@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: sysdeps_test.c,v 1.4 2003/02/16 11:38:59 ska Exp $
+ * $Id: sysdeps_test.c 15695 2007-07-02 10:58:43Z ska $
  *
  *********************************************************************/
 #include <string.h>       /* memset */
@@ -38,12 +38,15 @@ void test_blit(void)
 
 
   /* Blit some images at different places (see bitmaps.h) */
-  fe_draw_bitmap(p_player, 48,64, 0); /* Unaligned, 8 pixels wide */
-  fe_draw_bitmap(img2, 64,64, 1); /* Unaligned, 8 pixels wide, inverted */
-  fe_draw_bitmap(p_grass, 16,16, 0);  /* Byte-aligned position, 16 wide */
+  fe_draw_bitmap(p_player, 50,60, 0); /* Unaligned, 8 pixels wide */
+  fe_draw_bitmap(p_player, 51,72, 0); /* Aligned, 8 pixels wide */
+  fe_draw_bitmap(img2, 64,64, 1); /* Aligned, 8 pixels wide, inverted */
+  fe_draw_bitmap(p_grass, 16,16, 0);  /* Aligned position, 16 wide */
 
-  fe_draw_bitmap(p_player, 48,32, 0); /* Unaligned, 8 pixels wide */
+  fe_draw_bitmap(p_player, 48,30, 0); /* Aligned, 8 pixels wide */
   fe_draw_bitmap(p_grass, 65,19, 1); /* Unaligned, 16 pixels wide, inverted */
+  fe_draw_bitmap(p_grass, 68,79, 1); /* Unaligned, 16 pixels wide, inverted */
+  fe_draw_bitmap(p_grass, 168,79, 1); /* Unaligned, 16 pixels wide, inverted */
 
   fe_draw_bitmap(p_error_bitmap, 85,19, 0); /* Unaligned, 20 pixels wide (should not work) */
 }
@@ -100,7 +103,7 @@ int main(void)
 
   /* Wait for keypress */
   while ( !(fe_get_buttons() & FE_EVENT_EXIT) )
-    ;
+    fe_sleep(12);
 
   /* Finalize system-dependent things */
   fe_finalize();

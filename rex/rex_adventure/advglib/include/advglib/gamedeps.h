@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: gamedeps.h,v 1.3 2002/09/15 10:03:09 simon Exp $
+ * $Id: gamedeps.h 6264 2006-01-21 09:46:06Z ska $
  *
  ********************************************************************/
 #ifndef GAMEDEPS_H

@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: advgame.h,v 1.16 2003/03/02 14:04:37 ska Exp $
+ * $Id: advgame.h 3175 2005-07-07 13:32:32Z ska $
  *
  ********************************************************************/
 #ifndef ADVGAME_H
@@ -179,10 +179,33 @@ uint8_t advg_event_is(advg_event_t event, uint8_t nr);
 /**
  * The event type.
  *
+ *   1__2__3___3____4__1_____________________6___
+ *  |_|__|___|___|____|_|...............|________|
+ * 31                  19                        0
+ *
  * @see advg_handle_event()
  */
 typedef uint8_t advg_event_t;
 
+#define ADVG_EVENT_ENTER (1<<30)
+#define ADVG_EVENT_EXIT  (1<<31)
+#define ADVG_NEW_SCENE   (1<<18)
+
+#define ADVG_EVENT_GET_ENTER(event)      ((event) & ADVG_EVENT_ENTER)
+#define ADVG_EVENT_GET_EXIT(event)       ((event) & ADVG_EVENT_EXIT)
+#define ADVG_EVENT_GET_RECT_ID(event)    (((event) & (7 << 26)) >> 26)
+#define ADVG_EVENT_GET_ACTION(event)     (((event) & (7 << 23)) >> 23)
+#define ADVG_EVENT_GET_SPRITE(event)     (((event) & (15 << 19)) >> 19)
+#define ADVG_EVENT_GET_NEW_SCENE(event)  ((event) & ADVG_NEW_SCENE)
+#define ADVG_EVENT_GET_OBJECT_ID(event)  ((event) & (63))
+
+#define ADVG_EVENT_SET_ENTER(event)                 ((event) |= ADVG_EVENT_ENTER)
+#define ADVG_EVENT_SET_EXIT(event)                  ((event) |= ADVG_EVENT_EXIT)
+#define ADVG_EVENT_SET_RECT_ID(event, rect_id)      ((event) |= ((rect_id) << 26))
+#define ADVG_EVENT_SET_ACTION(event, action)        ((event) |= ((action) << 23))
+#define ADVG_EVENT_SET_SPRITE(event, sprite)        ((event) |= ((sprite) << 19))
+#define ADVG_EVENT_SET_NEW_SCENE(event)             ((event) |= (1 << 18))
+#define ADVG_EVENT_SET_OBJECT_ID(event, object_id)  ((event) |= (object_id)
 /**
  * The container for the objects.
  */
@@ -406,6 +429,8 @@ void advg_init_game(advg_game_t *p_game, uint8_t nr_tiles_,
 		    char *p_scene_filename_, char *p_messages_filename_,
 		    void *p_user_);
 #endif
+
+
 
 /**
  * The main game loop. This function implements the main loop of the

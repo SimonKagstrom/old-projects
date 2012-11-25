@@ -22,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: advg_private.h,v 1.2 2002/08/25 13:54:43 simon Exp $
+ * $Id: advg_private.h 3175 2005-07-07 13:32:32Z ska $
  *
  ********************************************************************/
 #ifndef ADVG_PRIVATE_H

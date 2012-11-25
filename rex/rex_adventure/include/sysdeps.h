@@ -1,5 +1,5 @@
 /*********************************************************************
- * Copyright (C) 2001-2002 Simon Kagstrom
+ * Copyright (C) 2001, 2007-2002 Simon Kagstrom
  *
  * Filename:      sysdeps.h
  * Description:   This file contains the defined functions that
@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: sysdeps.h,v 1.9 2002/10/21 17:42:34 simon Exp $
+ * $Id: sysdeps.h 15696 2007-07-02 10:59:16Z ska $
  *
  *********************************************************************/
 
@@ -168,7 +168,8 @@ extern void fe_set_pixel(uint8_t x, uint8_t y);
 # if defined(SDCC) /* What to do here? */
 #  define fe_clear_pixel(x,y)   RxDisplayBlockClear((x), (y), 1, 1)
 # else
-#  define fe_clear_pixel(x,y)   DsClearPixel(x,y)
+#  define fe_clear_pixel(x,y)   DsDisplayBlockClear((x), (y), 1, 1)
+// DsClearPixel(x,y)
 # endif /* SDCC */
 #else
 extern void fe_clear_pixel(uint8_t x, uint8_t y);

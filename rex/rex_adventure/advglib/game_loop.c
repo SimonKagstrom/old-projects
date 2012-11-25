@@ -1,5 +1,5 @@
 /*********************************************************************
- * Copyright (C) 2002,  Simon Kagstrom
+ * Copyright (C) 2002-2003,  Simon Kagstrom
  *
  * Filename:      game_loop.c
  * Description:   The main game loop. This runs in the client.
@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: game_loop.c,v 1.7 2002/10/31 20:59:44 ska Exp $
+ * $Id: game_loop.c 3175 2005-07-07 13:32:32Z ska $
  *
  *********************************************************************/
 #include "sysdeps.h"

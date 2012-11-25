@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: advgame.c,v 1.17 2003/02/16 11:38:54 ska Exp $
+ * $Id: advgame.c 3175 2005-07-07 13:32:32Z ska $
  *
  *********************************************************************/
 #include <string.h>            /* memset */

@@ -4,4 +4,3 @@ programmer needs to implement the main-method and an event-handler to
 create a game using advglib.
 
 See the documentation in doc/html/ for more information about advglib.
-

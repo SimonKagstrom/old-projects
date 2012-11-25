@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: advlib.c,v 1.9 2002/10/21 16:26:39 simon Exp $
+ * $Id: advlib.c 6264 2006-01-21 09:46:06Z ska $
  *
  *********************************************************************/
 #include "typedefs.h"

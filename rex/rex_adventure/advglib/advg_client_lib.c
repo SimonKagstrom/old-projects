@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: advg_client_lib.c,v 1.12 2003/02/16 11:38:54 ska Exp $
+ * $Id: advg_client_lib.c 6264 2006-01-21 09:46:06Z ska $
  *
  ********************************************************************/
 #include <rex/rex.h>

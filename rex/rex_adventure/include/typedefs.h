@@ -1,5 +1,5 @@
 /*********************************************************************
- * Copyright (C) 2001-2002 Simon Kagstrom
+ * Copyright (C) 2001-2005 Simon Kagstrom
  *
  * Filename:      typedefs.h
  * Description:   General typedefs for REX projects.
@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: typedefs.h,v 1.2 2002/09/11 19:38:46 simon Exp $
+ * $Id: typedefs.h 3175 2005-07-07 13:32:32Z ska $
  *
  *********************************************************************/
 #ifndef TYPEDEFS_H
