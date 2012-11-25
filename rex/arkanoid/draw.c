@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: draw.c,v 1.2 2003/02/09 10:45:20 ska Exp $
+ * $Id: draw.c,v $
  *
  ********************************************************************/
 #include <stdlib.h>         /* abs, rand */
@@ -41,13 +41,12 @@ void draw_lives(game_t *p_game)
 
   /* Display the number of lives left */
   for (i=0; i<p_game->lives; i++)
-    fe_draw_bitmap(p_ball_bitmap, SCREEN_WIDTH+10+i*6, SCREEN_HEIGHT-PADDLE_HEIGHT-10, 0);
-  fe_clear_area(SCREEN_WIDTH+10+i*6, SCREEN_HEIGHT-PADDLE_HEIGHT-10, FE_PHYS_WIDTH-(SCREEN_WIDTH+7+i*6), 5);
+    fe_draw_bitmap(p_ball_bitmap, SCREEN_WIDTH+12+i*6, SCREEN_HEIGHT-PADDLE_HEIGHT-10, 0);
+  fe_clear_area(SCREEN_WIDTH+12+i*6, SCREEN_HEIGHT-PADDLE_HEIGHT-10, FE_PHYS_WIDTH-(SCREEN_WIDTH+7+i*6), 5);
 }
 
 void draw_screen(game_t *p_game)
 {
-  /* Clear the screen, draw the number of lives left */
   fe_fill_area(SCREEN_WIDTH+4, 0, 2, SCREEN_HEIGHT-PADDLE_HEIGHT);
   draw_lives(p_game);
 }

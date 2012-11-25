@@ -19,7 +19,7 @@ LDFLAGS         = $(SDL_LDFLAGS)
 LDLIBS  	= -lSDL_ttf
 
 # For REX6000 binary generation
-REX_CFLAGS      = +rex -vn -O3 -create-app -D_NOFLOAT_ -DTARGET_REX $(INCLUDES) $(DEFINES) -I$(Z80_OZFILES)../include
+REX_CFLAGS      = +rex -vn -create-app -D_NOFLOAT_ -DTARGET_REX $(INCLUDES) $(DEFINES) -I$(Z80_OZFILES)../include
 
 ifeq ($(USE_PROFILING), y)
  CFLAGS  	+= -g -pedantic -DUSE_PROFILING

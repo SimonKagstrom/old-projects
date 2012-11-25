@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: rex_sysdeps.c,v 1.2 2003/02/09 10:44:57 ska Exp $
+ * $Id: rex_sysdeps.c $
  *
  *********************************************************************/
 #include <stdlib.h>         /* abs, rand */
@@ -225,7 +225,7 @@ uint8_t fe_load_data(char *p_dst, uint16_t offset, uint16_t len, char *p_filenam
 void fe_init()
 {
   DsEventClear(); /* Clear events */
-  fe_clear_screen(); /* Clear the display */
+  DsClearScreen(); /* Clear the display */
 }
 #endif
 

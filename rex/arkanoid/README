@@ -56,14 +56,14 @@ Other systems:
  compiled, but I'm not familiar with how it's done.
 
 When you have the REX executable, copy that to your REX with REXTools
-or something like that. You should also copy the Zarkanoid.txt file to
+or something like that. You should also copy the arkanoid.txt file to
 your rex (also with REXTools), which will add the levels as a memo
 with the name arkanoid.
 
 
 Adding levels
 -------------
-The levels are found in the Zarkanoid.txt file, and have a simple but
+The levels are found in the arkanoid.txt file, and have a simple but
 strict format. An example will help the explaining:
 
 --File begins--

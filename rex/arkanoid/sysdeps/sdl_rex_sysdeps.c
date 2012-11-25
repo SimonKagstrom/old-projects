@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: sdl_rex_sysdeps.c,v 1.1 2003/02/09 08:14:52 ska Exp $
+ * $Id: sdl_rex_sysdeps.c $
  *
  *********************************************************************/
 #include <stdio.h>         /* printf */
@@ -370,7 +370,7 @@ uint8_t fe_get_stylus(fe_point_t *p_point)
 void fe_sleep(uint16_t ticks)
 {
   if (ticks)
-    SDL_Delay(ticks*15);
+    SDL_Delay(ticks*5);
   else
     SDL_Delay(-1); /* Sleep forever */
 }

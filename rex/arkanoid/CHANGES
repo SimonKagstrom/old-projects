@@ -1,8 +1,5 @@
 0.9 -> 0.9.1
 * Changed the name of the level-file to Zarkanoid.txt instead.
-* Maximum number of lives is now 5 (and default is 4)
-* Runs in the emulator at least :-), applied some nasty tricks to have
-  it compile correctly with zcc
 
 0.4 -> 0.9
 * Ported arkanoid to the new libfe REX abstraction layer. Should be

@@ -22,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: sysdeps.h,v 1.1 2003/02/09 08:14:54 ska Exp $
+ * $Id: sysdeps.h $
  *
  *********************************************************************/
 

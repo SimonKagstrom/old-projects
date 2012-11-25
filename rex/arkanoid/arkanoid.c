@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: arkanoid.c,v 1.14 2003/02/09 10:48:11 ska Exp $
+ * $Id: arkanoid.c $
  *
  ********************************************************************/
 #include <stdlib.h>       /* abs */
@@ -31,6 +31,27 @@
 #include <sysdeps/sysdeps.h>
 #include "arkanoid.h"
 #include "draw.h"
+
+static sint16_t dir_chgs[] =
+  {/*dx, dy*/
+    /* Normal */
+    1,  0,
+    0,  1,
+    1,  0,
+    0,  1,
+
+    /* Fast */
+    1,  0,
+    1,  0,
+    1,  0,
+    0,  1,
+
+    /* One-dir */
+    1,  0,
+    1,  0,
+    1,  0,
+    1,  0,
+  };
 
 int rand_nr;
 #define SRAND() (rand_nr++) /* Used to get "random" numbers ;-) */
@@ -85,6 +106,9 @@ static void init_ball(ball_t *p_ball, sint16_t x, sint16_t y, uint8_t state)
   p_ball->y = y;
   p_ball->dx = 0; /* The ball is not moving at the start */
   p_ball->dy = 0;
+  p_ball->type = BALL_TYPE_NORMAL;
+  p_ball->swap = 0;
+  p_ball->step = 0;
   p_ball->state = state;
 }
 
@@ -96,13 +120,13 @@ static void init_special(special_t *p_special, sint16_t x, sint16_t y, uint8_t t
 }
 
 /* ---------- FIELD RELATED ---------- */
-/* "Load" a playfield and set the game to that one */
-static void goto_level(game_t *p_game)
+/* "Load" a plaayfield and set the game to that one */
+static int goto_level(game_t *p_game)
 {
   int i,j;
 
   if (p_game->level >= p_game->levels)
-    fe_finalize();
+    return -1;
 
   rand_nr = 0;
   p_game->nr_blocks=0;
@@ -123,23 +147,24 @@ static void goto_level(game_t *p_game)
 	  draw_block(p_block, i, j);
 	}
     }
+
+  return 0;
 }
 
 /* ---------- PADDLE RELATED ---------- */
 /* Move the paddle */
 static void update_paddle(paddle_t *p_paddle, sint16_t left, sint16_t right)
 {
-  sint16_t w = SCREEN_WIDTH-(sint16_t)p_paddle->width; /* Do the optimisation for zcc... */
-
   p_paddle->lastx = p_paddle->x;
+
   /* Update paddle position */
   p_paddle->x += right-left;
 
   /* If the paddle is off-field - move it within again. */
   if (p_paddle->x < 0)
     p_paddle->x = 0;
-  else if (p_paddle->x > w)
-    p_paddle->x = w;
+  else if (p_paddle->x > SCREEN_WIDTH-p_paddle->width)
+    p_paddle->x = SCREEN_WIDTH-p_paddle->width;
 }
 
 /* ---------- BALL RELATED ---------- */
@@ -159,23 +184,23 @@ static int update_ball(game_t *p_game, ball_t *p_ball)
   if (p_ball->x+BALL_WIDTH >= SCREEN_WIDTH)
     {
       p_ball->dx = -p_ball->dx;
-      p_ball->x = SCREEN_WIDTH-BALL_WIDTH;
+      p_ball->x = SCREEN_WIDTH-BALL_WIDTH-1; /* FIXME: Should not be needed */
     }
   else if (p_ball->x <= 0)
     {
       p_ball->dx = -p_ball->dx;
-      p_ball->x = 0;
+      p_ball->x = 1;
     }
-
   if (p_ball->y <= 0)
     {
       p_ball->dy = -p_ball->dy;
-      p_ball->y = 0;
+      p_ball->y = 1;
     }
 
   /* Move the ball */
-  p_ball->x += p_ball->dx;
-  p_ball->y += p_ball->dy;
+  p_ball->x += p_ball->dx*dir_chgs[p_ball->type * 8 + p_ball->step + p_ball->swap];
+  p_ball->y += p_ball->dy*dir_chgs[p_ball->type * 8 + p_ball->step + 1 - p_ball->swap];
+  p_ball->step = (p_ball->step + 1) & 3; /* Next step */
 
   /* If the ball hits the floor, bounce it and weaken the floor */
   if ((p_game->state & SPECIAL_FLOOR) &&
@@ -184,7 +209,7 @@ static int update_ball(game_t *p_game, ball_t *p_ball)
       /* If the floor is removed - clear the floor area. */
       if (!(--p_game->state & SPECIAL_FLOOR))
 	fe_clear_area(0, (SCREEN_HEIGHT-FLOOR_HEIGHT), SCREEN_WIDTH, FLOOR_HEIGHT);
-      p_ball->y = (SCREEN_HEIGHT-FLOOR_HEIGHT-BALL_HEIGHT);
+      p_ball->y = (SCREEN_HEIGHT-FLOOR_HEIGHT-BALL_HEIGHT)-1;
       p_ball->dy = -p_ball->dy;
     }
 
@@ -197,23 +222,23 @@ static void bounce_ball_paddle(game_t *p_game, ball_t *p_ball)
   if (p_ball->x < p_game->paddle.x+BALL_WIDTH)
     {
       /* The ball hits the paddle on the left side */
-      p_ball->dx = -3;
-      p_ball->dy = -1;
+      p_ball->type = BALL_TYPE_FAST;
+      p_ball->dx = -1;
+      DEBUG(printf("Fast left!\n"));
     }
   else if (p_ball->x > p_game->paddle.x+p_game->paddle.width-BALL_WIDTH)
     {
       /* The ball hits the paddle on the right side */
-      p_ball->dx =  3;
-      p_ball->dy = -1;
+      p_ball->type = BALL_TYPE_FAST;
+      p_ball->dx =  1;
+      DEBUG(printf("Fast right!\n"));
     }
   else
     {
-      /* The ball hits the paddle in the middle */
-      p_ball->dx = p_ball->dx<0?-2:2;
-      p_ball->dy = -2;
+      /* The ball hits the paddle in the middle, dont change */
     }
-  p_ball->dy = -abs(p_ball->dy); /* Only move upwards on a collision with the paddle */
-  p_ball->y = PADDLE_Y-PADDLE_HEIGHT; /* next iteration shouldn't cause an immediate collision */
+  p_ball->dy = -1;
+  p_ball->y = PADDLE_Y-PADDLE_HEIGHT-1; /* next iteration shouldn't cause an immediate collision */
 }
 
 /* Check if the ball collides with some block (and handle that) */
@@ -221,6 +246,7 @@ static void block_ball_collide(game_t *p_game, ball_t *p_ball)
 {
   sint16_t x = (p_ball->x+BALL_WIDTH/2)/BLOCK_WIDTH;
   sint16_t y = (p_ball->y+BALL_HEIGHT/2)/BLOCK_HEIGHT;
+  sint16_t rest_x = (p_ball->x+BALL_WIDTH/2)%BLOCK_WIDTH;
   block_t *p_block;
 
   /* Off field - ignore! */
@@ -246,7 +272,7 @@ static void block_ball_collide(game_t *p_game, ball_t *p_ball)
 	{
 	  /* Remove block */
 	  p_game->nr_blocks--;
-	  if ((p_block->type & TYPE_SPECIAL) && p_game->free_special != -1)
+	  if (p_block->type & TYPE_SPECIAL && p_game->free_special != -1)
 	    {
 	      init_special(&p_game->p_specials[p_game->free_special], x*BLOCK_WIDTH, y*BLOCK_HEIGHT, p_block->special);
 	      DEBUG(printf("Special %d\n", p_game->p_specials[p_game->free_special].type));
@@ -293,9 +319,6 @@ static void block_ball_collide(game_t *p_game, ball_t *p_ball)
 	}
       else
 	{
-	  sint16_t rest_x = (p_ball->x+BALL_WIDTH/2)%BLOCK_WIDTH;
-	  sint16_t chg = p_ball->dy>0 ? -1 : 1;
-
 	  /* Long side - change y.
 	   *
 	   * Three cases:
@@ -312,41 +335,30 @@ static void block_ball_collide(game_t *p_game, ball_t *p_ball)
 	   * applies. For the last third, case 3 applies and otherwise
 	   * case 2.
 	   */
-	  if (p_ball->dx >= 0)
+	  /* Ball is travelling to the right */
+	  if (rest_x < (BLOCK_WIDTH/3)+BALL_WIDTH/2)
 	    {
-	      /* Ball is travelling to the right */
-	      if (rest_x < (BLOCK_WIDTH/3)+BALL_WIDTH/2)
-		{
-		  /* Case 1 */
-		  p_ball->dy = chg*3;
-		  p_ball->dx -= 2;
-		}
-	      else if (rest_x > 2*(BLOCK_WIDTH/3)-BALL_WIDTH/2)
-		{
-		  /* Case 3 */
-		  p_ball->dy = chg;
-		  p_ball->dx = 3;
-		}
-	      else /* Case 2 */
-		p_ball->dy = -p_ball->dy;
+	      /* Case 1, one-way dy */
+	      p_ball->type = BALL_TYPE_ONE_WAY;
+	      p_ball->swap = 1; /* dy instead of dx */
+	      p_ball->dy = -p_ball->dy;
+	      p_ball->dx = (p_ball->dx > 0) ? 0 : -1;
+	      DEBUG(printf("Case 1\n"));
 	    }
-	  else
+	  else if (rest_x > 2*(BLOCK_WIDTH/3)-BALL_WIDTH/2)
 	    {
-	      /* Ball is travelling to the left */
-	      if (rest_x < (BLOCK_WIDTH/3)+BALL_WIDTH/2)
-		{
-		  /* Case 1 */
-		  p_ball->dy = chg;
-		  p_ball->dx = -3;
-		}
-	      else if (rest_x > 2*(BLOCK_WIDTH/3)-BALL_WIDTH/2)
-		{
-		  /* Case 3 */
-		  p_ball->dy = chg*3;
-		  p_ball->dx += 2;
-		}
-	      else /* Case 2 */
-		p_ball->dy = -p_ball->dy;
+	      /* Case 3, fast dx */
+	      p_ball->type = BALL_TYPE_FAST;
+	      p_ball->swap = 0; /* Don't swap */
+	      p_ball->dy = -p_ball->dy;
+	      p_ball->dx += (p_ball->dx == 0) ? 1 : 0;
+	      DEBUG(printf("Case 3\n"));
+	    }
+	  else /* Case 2, just bounce */
+	    {
+	      p_ball->dy = -p_ball->dy;
+	      p_ball->swap = 0; /* Don't swap */
+	      DEBUG(printf("Case 2\n"));
 	    }
 	}
       /* Always draw the block if it's hit (in order to have it look nicer and to remove it) */
@@ -406,8 +418,10 @@ static uint16_t get_input(game_t *p_game)
        *    assume that the player is firing (regardless of
        *    left/right).
        */
-      out |= (point.x < p_game->paddle.x+(PADDLE_WIDTH/2)) ? FE_EVENT_LEFT : FE_EVENT_RIGHT;
-
+      if (point.x < p_game->paddle.x+(PADDLE_WIDTH/2))
+	out |= FE_EVENT_LEFT;
+      else
+	out |= FE_EVENT_RIGHT;
       if (point.y < (SCREEN_HEIGHT/2))
 	out |= FE_EVENT_SELECT;
     }
@@ -417,7 +431,7 @@ static uint16_t get_input(game_t *p_game)
 }
 
 /* Called when the player finishes a level (move to next) */
-static void handle_level_finished(game_t *p_game)
+static int handle_level_finished(game_t *p_game)
 {
   fe_clear_screen();
   draw_screen(p_game);
@@ -425,15 +439,18 @@ static void handle_level_finished(game_t *p_game)
   /* Move the paddle to starting place */
   init_paddle(&p_game->paddle, PADDLE_NORMAL, (SCREEN_WIDTH/2)-(PADDLE_WIDTH/2));
 
-  /* Init the balls (only one active) and clear the specials */
-  memset(p_game->p_balls, 0, sizeof(ball_t)*MAX_BALLS+sizeof(special_t)*MAX_SPECIALS);
+  /* Init the balls (only one active) */
+  memset(p_game->p_balls, 0, sizeof(ball_t)*MAX_BALLS);
   init_ball(&p_game->p_balls[0], p_game->paddle.x+(PADDLE_WIDTH/2), PADDLE_Y-PADDLE_HEIGHT, BALL_STATE_ACTIVE|BALL_STATE_HOLDING);
   p_game->nr_balls = 1;
   p_game->state = 0;
 
+  /* Clear the specials */
+  memset(p_game->p_specials, 0, sizeof(special_t)*MAX_SPECIALS);
+
   p_game->level++;
 
-  goto_level(p_game);
+  return goto_level(p_game);
 }
 
 /* The main game loop */
@@ -477,6 +494,7 @@ static void do_game(game_t *p_game)
 		   * clear the HOLDING-bit. It will also shoot the
 		   * ball away upwards.
 		   */
+		  p_game->p_balls[i].dx = 1;
 		  p_game->p_balls[i].state &= (0xff ^ BALL_STATE_HOLDING);
 		  bounce_ball_paddle(p_game, &p_game->p_balls[i]);
 		}
@@ -604,7 +622,8 @@ static void do_game(game_t *p_game)
 	{
 	  fe_sleep(LEVEL_SLEEP_PERIOD);
 
-	  handle_level_finished(p_game);
+	  if (handle_level_finished(p_game) < 0)
+	    exit = TRUE; /* Last level */
 	}
 
       draw_paddle(&p_game->paddle);
@@ -638,11 +657,12 @@ void main()
   init_ball(&game.p_balls[0], game.paddle.x+(PADDLE_WIDTH/2), PADDLE_Y-PADDLE_HEIGHT, BALL_STATE_ACTIVE|BALL_STATE_HOLDING);
   game.nr_balls = 1;
 
-  /* We have a few lives from the beginning */
+  /* Init the specials */
   game.lives = NR_LIVES;
 
   /* Set the numbe of levels */
-  fe_load_data(game.p_levels, 0, (FIELD_WIDTH+1)*FIELD_HEIGHT, "Zarkanoid");
+  if (fe_load_data(game.p_levels, 0, (FIELD_WIDTH+1)*FIELD_HEIGHT, "Zarkanoid"))
+    fe_finalize(); /* Could not load the levels */
   game.levels = (game.p_levels[0]-'0')*10+(game.p_levels[1]-'0'); /* Number of levels */
   game.level = 5*((game.p_levels[3]-'0')*10+(game.p_levels[4]-'0')); /* Starting level (skip 5 levels at a time) */
 
@@ -651,7 +671,6 @@ void main()
   if (argc > 1)
     game.level = atoi(argv[1]);
 #endif
-  fe_sleep(100);
 
   /* Load the first level */
   goto_level(&game);
@@ -659,6 +678,7 @@ void main()
   /* Draw the game screen */
   draw_screen(&game);
 
+  fe_sleep(100);
   /* Start the game */
   do_game(&game);
 

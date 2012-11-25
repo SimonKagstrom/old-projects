@@ -1,11 +1,10 @@
 /*********************************************************************
  *
- * Copyright (C) 2001-2003,  Simon Kagstrom <ska@bth.se>
+ * Copyright (C) 2001,  Simon Kagstrom <ska@bth.se>
  *
- * Filename:      frontend.h
- * Description:   This file contains the defined functions that
- *                each frontend (drawing, keyboard input etc)
- *                should implement.
+ * Filename:      levels.h
+ * Description:   This file contains level data for use in the
+ *                REX emulator.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,28 +21,26 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: draw.h $
+ * $Id: levels.h,v $
  *
  ********************************************************************/
-#ifndef DRAW_H
-#define DRAW_H
+#ifndef LEVELS_H
+#define LEVELS_H
 
 #include <sysdeps/typedefs.h>
-#include "arkanoid.h"
 
-/* Drawing functions */
+const uint8_t level_data[] = {
+  '0','1','\n',
+  '0','0','\n',
+  '0','0','0','0','0','0','0','0','0','0','\n',
+  '0','1','5','1','5','5','1','1','1','0','\n',
+  '0','1','5','1','5','5','1','1','1','0','\n',
+  '0','1','5','1','5','5','1','1','1','0','\n',
+  '0','1','5','1','5','5','1','1','1','0','\n',
+  '0','1','5','1','5','5','1','1','1','0','\n',
+  '0','1','5','1','5','5','1','1','1','0','\n',
+  '0','1','5','1','5','5','1','1','1','0','\n',
+  '0','0', '0','0','0','0','0','0','0','0','\n'
+};
 
-/* Draw the game border */
-extern void draw_screen(game_t *p_game);
-/* Draw the number of lives left */
-extern void draw_lives(game_t *p_game);
-/* Draw the block p_block at x, y */
-extern void draw_block(block_t *p_block, uint8_t x, uint8_t y);
-/* Draw the paddle p_paddle */
-extern void draw_paddle(paddle_t *p_paddle);
-/* Draw the ball p_ball */
-extern void draw_ball(ball_t *p_ball);
-/* Draw the special p_special */
-extern void draw_special(special_t *p_special);
-
-#endif /* !DRAW_H */
+#endif

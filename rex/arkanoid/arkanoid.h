@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
  *
- * $Id: arkanoid.h,v 1.12 2003/02/09 10:46:38 ska Exp $
+ * $Id: arkanoid.h,v $
  *
  ********************************************************************/
 #ifndef ARKANOID_H
@@ -41,11 +41,11 @@
 #define FLOOR_HEIGHT      3
 
 /* Paddle definitions */
-#define PADDLE_NORMAL        0 /* The normal paddle */
 #define PADDLE_HEIGHT        6
 #define PADDLE_WIDTH         24
 #define PADDLE_LONG_WIDTH    32
 #define PADDLE_SHORT_WIDTH   16
+#define PADDLE_NORMAL        (uint8_t)0 /* The normal paddle */
 #define PADDLE_Y             (SCREEN_HEIGHT-PADDLE_HEIGHT-FLOOR_HEIGHT)
 
 /* Ball definitions */
@@ -73,13 +73,13 @@
 #define SPECIAL_GUN          (uint8_t)128 /* Not used yet */
 #define SPECIAL_MAX          (uint8_t)7   /* The number of different specials */
 
-#define SPECIAL_WIDTH        6
-#define SPECIAL_HEIGHT       8
+#define SPECIAL_WIDTH       (sint16_t)6
+#define SPECIAL_HEIGHT      (sint16_t)8
 
-#define MAX_SPECIALS         3 /* The maximum number of concurrent specials */
+#define MAX_SPECIALS         (uint8_t)3 /* The maximum number of concurrent specials */
 
-#define NR_LIVES             4
-#define MAX_LIVES            5
+#define NR_LIVES             5
+#define MAX_LIVES            8
 
 #if defined(TARGET_REX)
 #define DEBUG(x)
@@ -91,13 +91,19 @@
 #define LEVEL_SLEEP_PERIOD   (1000/64)
 #endif /* TARGET_REX */
 
+
+#define BALL_TYPE_NORMAL     0
+#define BALL_TYPE_FAST       1
+#define BALL_TYPE_ONE_WAY    2
+
+
 /* The struct for the player paddle */
 typedef struct
 {
+  uint8_t type;       /* Long, short etc */
+  uint8_t width;
   sint16_t x;
   sint16_t lastx;
-  sint16_t width;
-  uint8_t type;       /* Long, short etc */
 } paddle_t;
 
 /* The struct for the ball */
@@ -110,6 +116,9 @@ typedef struct
   sint16_t y;
   sint16_t lastx;
   sint16_t lasty;
+  sint16_t swap;
+  sint16_t type;
+  sint16_t step;
 } ball_t;
 
 /* The struct for the blocks */
@@ -136,14 +145,14 @@ typedef struct
   ball_t    p_balls[MAX_BALLS];                    /* The ball(s) */
   special_t p_specials[MAX_SPECIALS];              /* The current specials */
   paddle_t  paddle;                                /* The player paddle */
-  uint8_t   p_levels[FIELD_WIDTH*FIELD_HEIGHT+40]; /* A pointer to the levels */
+  char      p_levels[FIELD_WIDTH*FIELD_HEIGHT+40]; /* A pointer to the levels */
   uint8_t   levels;                              /* The number of levels */
   uint8_t   state;                               /* Floor on or off */
   uint8_t   nr_balls;                            /* The current number of balls */
   uint8_t   nr_blocks;                           /* The number of blocks on this level */
   uint8_t   nr_specials;                         /* The current number of specials */
-  sint16_t  free_ball;                           /* These two specify if there is */
-  sint16_t  free_special;                        /* a free ball/special slot. */
+  sint8_t   free_ball;                           /* These two specify if there is */
+  sint8_t   free_special;                        /* a free ball/special slot. */
   uint8_t   level;                               /* The current level */
   uint8_t   lives;                               /* The number of lives the player has */
 } game_t;

@@ -5,7 +5,7 @@
 ;;;
 ;;;  @version@
 ;;;
-;;;  $Id: draw_bitmap.S,v 1.1 2003/02/09 08:14:52 ska Exp $
+;;;  $Id: draw_bitmap.S,v 1.1 2002/11/07 16:22:25 ska Exp $
 ;;;
 
 ;;;
