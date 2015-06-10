@@ -1,0 +1,81 @@
+Boulder Dash 12h
+----------------
+
+0. B„ttre namn p† spelet!
+
+1. Game
+-------
+Use arrows for basic movement, left shift to push objects away from you.
+Escape to suicide. Walls cannot be passed, though weak walls (darker)
+can be blown away. Teleporters move you to another teleporter (randomly.)
+Pull levers to set off bombs or falling stones, beware of traps!
+
+boulder.exe - normal game (standard keyboard handler)
+b_altkey.exe - own keyboard handler (works, but can hang the system)
+b_txt.exe - the first version of this game, textbased!
+
+... Have fun!
+
+2. Editing Maps
+---------------
+Maps are created in an Ansi-Editor, but please consider the following
+rules:
+
+* You must put a border of walls (±) around the playfield.
+* The field must not be greater than 48 rows.
+* At the end of the file, at the three last positions, enter the number of
+  diamonds required to finish the level. It should look something like
+  this:
+±±±±±±±±±±±±±±±±±±±±±±±±± [..] (the bottom wall)
+  8                       [..] (diamonds needed)
+  In this case, 8 diamonds are needed. Remeber to pad with spaces if the
+  number if lower than 100, i.e do NOT enter 008.
+* The player starts at (ù ASCII 249)...
+* ... and exits the level at (Û)
+* Letters 'a' and 'A' represents a lever, and a boulder-creating wall.
+  You may only enter one 'a' and one 'A'.
+* 'b' triggers a bomb at 'B'.
+* 'c' is a hidden lever that sends a wall downwards at 'C'.
+* '*' is a moveable block.
+
+Other rules:
+999 maps are allowed, ordered by file-extention. (boulder.xxx, i.e
+boulder.1 [..] boulder.999).
+500 boulders, diamonds, enemies, moveable blocks and teleporters can be
+applied to every level.
+
+3. Credits
+----------
+Programming               Simon K†gstr”m
+Reciving much help from   Ingemar Henriksson
+
+Levels                    Simon K†gstr”m
+                          Ingemar Henriksson
+
+4. Disclaimer
+-------------
+This piece of software is freeware. Copy it as you wish, but please don't
+alter anything exept the level-maps, your own maps may also be released freely.
+
+I take no responsability for any damage caused by Boulder Dash, use it
+at your own risk (though it shouldn't really cause any problems.)
+
+5. Get in touch
+---------------
+
+Send me an E-Mail if you have bug-reports, tips, comments or want to
+contribute with some good levels. You can reach me at:
+
+etn97ksi@student2.lu.se
+
+/Simon K†gstr”m
+
+
+Framtida f”rb„ttringar (utopiska)
+---------------------------------
+Universell funktion f”r fallande/flyttade objekt. (N„stan)
+Skriptspr†k f”r objektens funktion.
+Intelligentare fiender (r”r sig l„ngs g†ngar.)
+Objekten r”r sig pixelrad f”r pixelrad mellan rutor.
+Flera knapptryckningar samtidigt / Gubben r”r sig naturtroget.
+Objektorientering...

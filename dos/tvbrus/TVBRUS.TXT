@@ -1,0 +1,38 @@
+Hej!
+
+Detta „r ett litet program som simulerar den b„sta kanalen p† televisionen -
+myrornas krig. Den sl†r †tminstone TV3 med h„stl„ngder. Programmet k”rs i den
+lite oortodoxa uppl”sningen 320*400*256,  vilket f”r dem som „r insatta
+betyder Mode-X. 256 f„rger b”r f”rst†s tas med en nypa salt, tv-simulationer
+klarar sig gott med tv†.
+
+Detta program skrev jag en g†ng f”r l„nge sedan, det „r ett av de f”rsta (och
+sista) i Mode-X. Det „r skrivet i Pascal, med lite snuttar inline-asm f”r
+saker som „r jobbiga att g”ra i Pascal. F”rv„nta er ingen support p† detta
+program, det „r busenkelt att anv„nda - och f”rst”r f”rhoppningsvis ingen-
+ting.
+
+
+
+Anv„ndning:
+-----------
+
+Vid dosprompten:
+tvbrus.exe
+
+I Windows 95:
+Anv„nd utforskaren.
+
+I Windows 98:
+(Alt 1):
+1. G† ut i en DOS-prompt.
+2. Be till gud (whatever) att W98 inte krashar.
+        2.5 Om inte krashat, se "Vid dosprompten". 
+4. S† det krashade i alla fall. Trodde v„l det. Installera n†tt b„ttre.
+(Alt 2):
+Se Windows 95. (Kr„ver dock ett st”rre m†tt av Bill-blidkning). 
+
+// Simon K†gstr”m, skriver f”r tillf„llet i 8-bittars ASCII.
+
+terkoppling sker till:
+simon.kagstrom@populus.net

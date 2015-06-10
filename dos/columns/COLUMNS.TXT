@@ -1,0 +1,11 @@
+Starta spelet genom att trycka p† ESC. Och d„refter valfri tangent (Jag
+vet, inte s††† logiskt...)
+
+F”ljande funktioner finns i spelet: (Om jag nu inte gl”mt n†n, det var
+ett tag sedan jag h”ll p† med det h„r..)
+R   -   Resetta musiken
+W   -   "Wipe-kloss" (Tar bort alla brickor av den f„rg den landar p†)
+ESC -   Hoppa ur.
+
+Har man inte GUS f†r man sn„llt v„lja NO SOUND i b”rjan.. :-)
+

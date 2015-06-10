@@ -1,0 +1,16 @@
+Programbeskrivning
+------------------
+
+DOS-hack. Sl„ng ut lite text p† sk„rmen, och starta programmet s† f†r du
+se vad det g”r. Mycket anv„ndbart.. :-)
+
+Ja, jag „r medveten om att detta g†r att g”ra b„ttre, och jag vet hur. Men
+utvecklingen av detta program „r avstannad sedan l„nge. Programmet „r f”r
+”vrigt skrivet i C/C++, och kompilerat i Borland C++ 3.1.
+
+Anv„ndning
+----------
+Vid dosprompten:
+follow.exe
+
+// Simon K†gstr”m, simon.kagstrom@populus.net
